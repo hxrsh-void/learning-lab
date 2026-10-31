@@ -149,7 +149,7 @@ var finalModal = makeOverlay('kg-final',
 var ending = makeOverlay('kg-ending',
   '<div class="kg-kicker" style="color:#c9a24a">The warden restored</div>' +
   '<div class="kg-glyph" style="background:#e6bb6a;color:#2a1608">影</div>' +
-  '<p class="kg-story">The seals flare gold. Light pours from the hall - and out of it steps ' +
+  '<p class="kg-story">The seals flare gold. Light pours from the hall, and out of it steps ' +
   'the temple\u2019s own <b>shadow</b>, whole again.<br><br>' +
   'It bows to you, once, deeply. The vermilion moon softens toward dawn. ' +
   'The mountain sleeps. The warden walks.</p>' +
@@ -223,7 +223,7 @@ function collectCurrent(){
   document.getElementById('kg-verse').textContent = c.verse;
   document.getElementById('kg-keyword').textContent = c.keyword;
   document.getElementById('kg-count').textContent = sealCount() >= CHAPTERS.length
-    ? 'All five seals recovered - the temple door is listening'
+    ? 'All five seals recovered. The temple door is listening'
     : 'Seal ' + sealCount() + ' of 5';
   showOverlay(sealModal);
 }
