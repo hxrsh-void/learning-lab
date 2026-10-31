@@ -116,8 +116,8 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .nav{
   /* Width comes from --vw, not from right:0. A fixed element resolves its
      inset against the initial containing block, and the page's own horizontal
-     overflow makes that block wider than the screen — 437 against a 390 phone,
-     860 against a 768 tablet — which carried the burger off the right edge.
+     overflow makes that block wider than the screen - 437 against a 390 phone,
+     860 against a 768 tablet - which carried the burger off the right edge.
      --vw is the layout viewport, written on every resize. */
   position:fixed; top:0; left:0; width:var(--vw, 100%); height:var(--nav-h); z-index:50;
   display:flex; align-items:center; gap:24px; padding:0 var(--pad);
@@ -125,7 +125,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 }
 /* The sticky wash sits on its own layer rather than on the bar. A
    backdrop-filter promotes its element to the containing block for any
-   position:fixed descendant, and the bar holds the mobile menu sheet — put the
+   position:fixed descendant, and the bar holds the mobile menu sheet - put the
    blur here and the sheet was measured against an 84px bar instead of the
    frame, for as long as the blur took to fade. */
 .nav::before{
@@ -235,7 +235,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   /* A chapter's scrim is there to hold its own copy off the sanctuary, and it
      is inset -22% so its edges never land as a seam. That overshoot, plus the
      section's top padding, means it was washing most of a screen of scene
-     above the chapter — the frame stayed masked long after the hero had let
+     above the chapter - the frame stayed masked long after the hero had let
      go of it. The mask takes the top of it back off: nothing at the very top,
      full strength by the time the chapter's own first line arrives. */
   -webkit-mask-image:linear-gradient(transparent, #000 44%);
@@ -252,7 +252,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .sec-head .k b{ color:var(--vermilion); font-weight:500; }
 .rule{ flex:1 1 auto; height:1px; background:var(--line-soft); }
 
-/* — chapter I: the gate */
+/* - chapter I: the gate */
 .gate-grid{ display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,1fr); gap:clamp(28px,5vw,90px); align-items:start; }
 .gate-grid h2{ max-width:11ch; }
 .gate-copy{ padding-top:6px; }
@@ -270,13 +270,13 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .gate-stats div b{ display:block; font-size:clamp(22px,2.1vw,32px); font-weight:300; letter-spacing:-.02em; }
 .gate-stats div span{ font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
 
-/* — chapter II: pathways cards */
+/* - chapter II: pathways cards */
 .cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4vw,22px); align-items:start; }
 .card{ position:relative; cursor:pointer; }
 .card:nth-child(1){ transform:translateY(0); }
 .card:nth-child(2){ transform:translateY(clamp(26px,5vw,74px)); }
 .card:nth-child(3){ transform:translateY(clamp(52px,10vw,148px)); }
-/* the frame is a hole punched in the page — the scene is rendered straight
+/* the frame is a hole punched in the page - the scene is rendered straight
    into this rectangle with a scissored viewport, so each card is a live
    window onto a different corner of the sanctuary */
 .card-fr{
@@ -311,8 +311,8 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .on-cloth::after{ display:none; }
 
 /* ------------------------------------------------- the lights in the stills
-   The three plates each have one source in them — two blood moons and a lit
-   stone lantern — and they are the only warm thing in an otherwise cold set of
+   The three plates each have one source in them - two blood moons and a lit
+   stone lantern - and they are the only warm thing in an otherwise cold set of
    images. A glow laid over each one, screened so it adds light rather than
    painting over it, is enough to make a flat still look like it is burning.
 
@@ -321,8 +321,8 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
    a loop within a couple of seconds; two beating against each other do not
    come back around inside the time anyone looks at a card.
 
-   The moon and the lantern are not the same event. A flame gutters — short,
-   irregular, deep — so the lantern's track is written unevenly by hand. A moon
+   The moon and the lantern are not the same event. A flame gutters - short,
+   irregular, deep - so the lantern's track is written unevenly by hand. A moon
    only breathes through moving air, so the moons get a slow, shallow swell and
    nothing more. Giving them both a flicker is what makes this kind of thing
    look like a novelty; the difference is the whole effect. */
@@ -390,7 +390,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .card-meta{ display:flex; justify-content:space-between; margin-top:12px;
   font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
 
-/* — chapter III: curriculum */
+/* - chapter III: curriculum */
 .cur-head{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.72fr); gap:clamp(28px,5vw,90px); align-items:end; margin-bottom:clamp(34px,6vh,72px); }
 .cur-head h2{ max-width:13ch; }
 .cur{ border-top:1px solid var(--line-soft); }
@@ -416,7 +416,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   transform:scaleX(0); transform-origin:left; transition:transform .7s var(--ease-out); }
 .les:hover .bar{ transform:scaleX(1); }
 
-/* — chapter IV: eternity */
+/* - chapter IV: eternity */
 .fin{ min-height:100svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
 .fin .eyebrow{ margin-bottom:26px; }
 .fin h2{ font-size:clamp(38px,7.4vw,124px); line-height:.94; letter-spacing:-.03em; text-transform:uppercase; }
@@ -434,7 +434,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .cta:hover i{ transform:none; }
 .cta:hover svg path{ stroke:#0a0716; }
 
-/* — footer */
+/* - footer */
 .foot{ position:relative; padding:clamp(50px,8vh,96px) var(--pad) clamp(26px,4vh,40px);
   border-top:1px solid var(--line-soft); }
 .foot-grid,.foot-base{ position:relative; }
@@ -498,7 +498,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
      once the bar went sticky and started hiding on scroll the open panel was
      measured against the bar instead of the viewport: 146px tall, dragged off
      the top, with the page showing through beside it. Neither may apply while
-     the sheet is open — it covers the frame, so there is nothing left to blur. */
+     the sheet is open - it covers the frame, so there is nothing left to blur. */
   /* A hide transform still promotes the bar, so drop it the instant the sheet
      opens. Without transition:none it eases out over .55s and the sheet spends
      that whole time measured against the bar. */
@@ -518,18 +518,18 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   .hero-cue{ display:none; }
 }
 /* ================================================== section layouts (B set)
-   The six sections ship their B compositions — hero split, story spread,
+   The six sections ship their B compositions - hero split, story spread,
    gardens mosaic, chapter atlas, gallery closing, manifesto footer. They are
    keyed off stable body data attributes so the rules above keep reading as
    the plain grammar of the page and every B override stays in one block.   */
 
-/* — hero B · split: an editorial reading column holds the left, a compact
+/* - hero B · split: an editorial reading column holds the left, a compact
      numbered index sits under it, and the live scene window becomes a low,
      right-hand counterweight. The scene itself remains untouched.
 
      The column carried a 90° scrim over the left three-quarters of the frame.
      It has gone: the sanctuary is already near-black behind the reading, and
-     measured against it the copy loses almost nothing without it — the
+     measured against it the copy loses almost nothing without it - the
      headline 15.98:1 to 15.47:1, the standfirst 7.94:1 to 7.75:1, the index
      16.11:1 to 16.08:1, all far past what either needs. It was darkening the
      approach, the gate and the lower steps to buy half a point of contrast
@@ -550,7 +550,7 @@ body[data-layout-hero="b"] .peek{
   left:auto; right:var(--pad); top:auto; bottom:clamp(38px,7vh,96px);
 }
 body[data-layout-hero="b"] .peek-cap b.jp{ font-size:clamp(20px,2.2vw,34px); letter-spacing:.18em; }
-/* The Japanese title reads down the right edge, hung under the navigation —
+/* The Japanese title reads down the right edge, hung under the navigation -
    the one mark on that side of the frame now that the romanization has gone. */
 body[data-layout-hero="b"] .hero-side{
   left:auto; right:var(--pad); top:calc(var(--nav-h) + clamp(14px,3vh,42px));
@@ -561,7 +561,7 @@ body[data-layout-hero="b"] .hero-side .v{
   font-size:clamp(30px,3.2vw,54px); letter-spacing:.12em; color:rgba(241,230,210,.62);
 }
 
-/* — story B · spread: the title crosses two columns, the reading column is
+/* - story B · spread: the title crosses two columns, the reading column is
      held to the right, and the figures become a ruled band. */
 body[data-layout-story="b"] .gate-grid{
   grid-template-columns:minmax(120px,.38fr) minmax(0,1.08fr) minmax(280px,.88fr);
@@ -573,7 +573,7 @@ body[data-layout-story="b"] .gate-stats{ display:grid; grid-template-columns:rep
 body[data-layout-story="b"] .gate-stats div{ min-height:108px; padding:18px; border-left:1px solid var(--line-soft); }
 body[data-layout-story="b"] .gate-stats div:last-child{ border-right:1px solid var(--line-soft); }
 
-/* — gardens B · mosaic: one immersive live window beside two stacked ones.
+/* - gardens B · mosaic: one immersive live window beside two stacked ones.
      The cards stretch to their rows and the frames flex, so the two small
      viewports meet the tall one exactly instead of drifting apart. */
 body[data-layout-gallery="b"] .cards{
@@ -587,7 +587,7 @@ body[data-layout-gallery="b"] .card:first-child{ grid-row:1 / 3; }
 body[data-layout-gallery="b"] .card:first-child .card-fr{ flex:0 0 auto; height:min(72vh,760px); }
 body[data-layout-gallery="b"] .card:not(:first-child) .card-fr{ min-height:200px; }
 
-/* — chapters B · atlas: a two-then-three plate grid instead of a syllabus.
+/* - chapters B · atlas: a two-then-three plate grid instead of a syllabus.
      Number and title sit at the top of each plate, the running time drops to
      the foot of it. */
 body[data-layout-curriculum="b"] .cur-head{ grid-template-columns:minmax(0,.72fr) minmax(0,1.2fr); align-items:start; }
@@ -607,7 +607,7 @@ body[data-layout-curriculum="b"] .les h3{ font-size:clamp(20px,2vw,30px); }
 body[data-layout-curriculum="b"] .les p{ display:block; max-width:34ch; }
 body[data-layout-curriculum="b"] .les .t{ text-align:left; margin-top:auto; }
 
-/* — closing B · gallery: the title hangs vertically on the right while the
+/* - closing B · gallery: the title hangs vertically on the right while the
      chapter mark, the last line and the call to action run down the left. */
 body[data-layout-closing="b"] .fin{
   display:grid; grid-template-columns:minmax(260px,.7fr) minmax(0,1.3fr); grid-template-rows:auto auto auto;
@@ -622,7 +622,7 @@ body[data-layout-closing="b"] .fin h2{
 body[data-layout-closing="b"] .fin p{ grid-column:1; grid-row:2; margin:0; }
 body[data-layout-closing="b"] .fin .cta{ grid-column:1; grid-row:3; justify-self:start; margin-top:4px; }
 
-/* — footer B · manifesto: the statement leads, the navigation becomes a
+/* - footer B · manifesto: the statement leads, the navigation becomes a
      compact ruled index beneath it. */
 body[data-layout-footer="b"] .foot-grid{ grid-template-columns:repeat(3,1fr); }
 body[data-layout-footer="b"] .foot-brand{
@@ -646,14 +646,14 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
    itself is untouched, this is only the garden that grows in front of it.
 
    The cut-outs are the nearest plane on the page, so they sit in front of the
-   reading rather than behind it. Inside .page — itself z-index:10, above the
+   reading rather than behind it. Inside .page - itself z-index:10, above the
    #gl canvas at 0:
      -1   .sec::before / .foot::before   the section scrims
       2   headings, copy, links, cards, stats, CTA
       3   .fg                            the cut-outs: aria-hidden, inert
    .page caps everything it holds at tier 10, which is under the fixed
    furniture (rail 45, nav 50), so the chapter's live near plane is moved out
-   to #fg-sky at 52 — over the layout and the navigation both, and still under
+   to #fg-sky at 52 - over the layout and the navigation both, and still under
    the passes that treat the frame as one image: vignette 55, grain 60,
    cursor 80.
 
@@ -662,7 +662,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
    inert and invisible: a near plane that scrolls with the page reads as
    wallpaper printed on the document rather than as something standing between
    the camera and the scene, so there is no second, section-owned appearance.
-   Every piece is therefore placed from the bottom edge of that fixed plane —
+   Every piece is therefore placed from the bottom edge of that fixed plane -
    left/right and bottom, never top.
 
    The entrance is driven by the chapter, not by the scroll observer: each
@@ -678,13 +678,13 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 }
 /* Nothing inside a section may widen the document. The foreground cut-outs and
    the cloth canvases are placed to hang past the frame edges on purpose, and as
-   ordinary in-flow descendants they dragged the page box out with them — 194px
+   ordinary in-flow descendants they dragged the page box out with them - 194px
    past a 1440 frame. Clip the horizontal axis at the section, which is exactly
    viewport-wide, so each overhang is cut precisely where it leaves the screen.
    `clip` pairs with `visible` without coercing it, so no scroll container is
    created and every bit of vertical bleed survives. */
 .sec, .foot{ overflow-x:clip; overflow-y:visible; }
-/* the host for whichever chapter currently owns the near plane — no box of
+/* the host for whichever chapter currently owns the near plane - no box of
    its own, since every stage it holds is position:fixed to the viewport */
 #fg-sky{
   position:fixed; left:0; top:0; width:0; height:0;
@@ -735,45 +735,45 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
    Every piece is anchored from the bottom of that plane, which is the bottom
    of the viewport. The cut-outs in png/ are trimmed flush to their own lowest
    opaque row, so a negative bottom here is a real amount of artwork buried off
-   the foot of the frame, not slack in the file — the ground-sitting pieces
+   the foot of the frame, not slack in the file - the ground-sitting pieces
    carry enough of it that their base line never lifts off the edge. */
 
-/* — I · the gate: the wall runs along the lower-left frame, a pine holds the
+/* - I · the gate: the wall runs along the lower-left frame, a pine holds the
      far edge, and one bank of grass closes the foot of the chapter */
 /* Wall against the left edge, pine against the right: the chapter is framed
    by the two of them with the court open between.
 
-   left:0, not a negative offset — the plate is trimmed to its own artwork, so
+   left:0, not a negative offset - the plate is trimmed to its own artwork, so
    pulling it off-frame cuts the gate itself rather than trimming empty margin.
    Its left edge sits on the viewport's. */
 [data-fg="gate"] .fg-wall  { left:0; bottom:-30px; width:clamp(430px,47vw,780px); }
 [data-fg="gate"] .fg-pine  { right:-4%; bottom:-46px; width:clamp(190px,21vw,370px); }
 [data-fg="gate"] .fg-grass { left:3%;   bottom:-150px; width:clamp(420px,60vw,1050px); }
 
-/* — II · still gardens: sakura and maple sweep in from the two lower corners
+/* - II · still gardens: sakura and maple sweep in from the two lower corners
      and carry their whole length, a lit lantern and a low bush hold the edges */
 [data-fg="pathways"] .fg-sakura { left:-6%;  bottom:-86px;  width:clamp(430px,50vw,880px); }
 [data-fg="pathways"] .fg-leaves { right:-6%; bottom:-62px;  width:clamp(330px,38vw,670px); }
 [data-fg="pathways"] .fg-lantern{ left:-1%;  bottom:-96px;  width:clamp(120px,13vw,215px); }
 [data-fg="pathways"] .fg-bush   { right:-4%; bottom:-38px;  width:clamp(250px,30vw,530px); }
-/* the lantern is the one lit object in the library — it keeps its ember */
+/* the lantern is the one lit object in the library - it keeps its ember */
 [data-fg="pathways"] .fg-lantern > img{ filter:saturate(.96) brightness(1); }
 [data-fg="pathways"] .fg-leaves > img{ transform-origin:100% 40%; }
 
-/* — III · sacred craft: basalt and a low wall fragment bracket the atlas and
+/* - III · sacred craft: basalt and a low wall fragment bracket the atlas and
      a stand of grass ties them together, all three below the plate grid */
 [data-fg="lessons"] .fg-wall   { right:-8%; bottom:-78px; width:clamp(390px,50vw,870px); }
 [data-fg="lessons"] .fg-stones { left:-4%;  bottom:-48px; width:clamp(250px,30vw,530px); }
 [data-fg="lessons"] .fg-grass  { left:24%;  bottom:-84px; width:clamp(280px,33vw,580px); }
 
-/* — IV · afterlight: a far hill closes the horizon, the shrine ruins stand at
+/* - IV · afterlight: a far hill closes the horizon, the shrine ruins stand at
      the left of it, grass banks the right, one branch hangs into the corner */
 [data-fg="eternity"] .fg-hill   { left:-8%; width:min(150vh,116%); bottom:calc(-1 * min(20vh,15.5vw)); }
 [data-fg="eternity"] .fg-ruins  { left:-5%;  bottom:-32px; width:clamp(240px,28vw,500px); }
 [data-fg="eternity"] .fg-grass  { right:-7%; bottom:-60px; width:clamp(300px,37vw,670px); }
 [data-fg="eternity"] .fg-sakura { left:-15%; bottom:-70px; width:clamp(280px,33vw,580px); }
 
-/* — colophon: one restrained planting along the lower edge, nothing above it */
+/* - colophon: one restrained planting along the lower edge, nothing above it */
 [data-fg="foot"] .fg-bush   { left:-6%;  bottom:-110px; width:clamp(230px,28vw,480px); }
 [data-fg="foot"] .fg-grass  { right:-5%; bottom:-98px;  width:clamp(255px,30vw,530px); }
 [data-fg="foot"] .fg-stones { left:36%;  bottom:-104px; width:clamp(190px,22vw,370px); }
@@ -829,7 +829,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   body[data-layout-hero="b"] .chapters{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 14px; }
   body[data-layout-hero="b"] .chip{ flex-direction:row; gap:14px; }
   /* Same shape of bug: the layout selector outranks the plain single-column
-     rule, so the heading kept a 37% column while its words are set at 30px —
+     rule, so the heading kept a 37% column while its words are set at 30px -
      "CHAPTERS." alone is wider than that, and it spilled over the paragraph. */
   body[data-layout-curriculum="b"] .cur-head{ grid-template-columns:1fr; gap:18px; align-items:start; }
   body[data-layout-hero="b"] .chip .num{ font-size:clamp(26px,8vw,36px); }
@@ -934,7 +934,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <!-- ============================================================ hero -->
 <section class="hero" id="hero" data-cam="0">
   <div class="hero-top">
-    <div class="eyebrow" data-rv="fade"><span class="dot"></span> Night one — The Hidden Gate</div>
+    <div class="eyebrow" data-rv="fade"><span class="dot"></span> Night one - The Hidden Gate</div>
     <h1 class="display h-hero">
       <span class="mask-line"><span>Something under</span></span>
       <span class="mask-line"><span>the red moon</span></span>
@@ -989,7 +989,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </span>
   </div>
   <div class="sec-head" data-rv="fade">
-    <span class="k"><b>01</b> — The Gate</span><span class="rule"></span><span class="k jp">山門</span>
+    <span class="k"><b>01</b> - The Gate</span><span class="rule"></span><span class="k jp">山門</span>
   </div>
   <div class="gate-grid">
     <h2 class="display h-sec" data-rv="up">Black cedar, worn stone, one gate left open.</h2>
@@ -1032,7 +1032,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </span>
   </div>
   <div class="sec-head" data-rv="fade">
-    <span class="k"><b>02</b> — Still Gardens</span><span class="rule"></span><span class="k jp">庭園</span>
+    <span class="k"><b>02</b> - Still Gardens</span><span class="rule"></span><span class="k jp">庭園</span>
   </div>
   <div class="cards" id="cards">
     <article class="card" data-rv="up" data-view="0" data-cursor>
@@ -1064,7 +1064,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 
 <!-- ============================================================ chapter III -->
 <section class="sec" id="lessons" data-cam="3">
-  <!-- foreground: a low periphery for the atlas — wall fragment, basalt, one stand of grass -->
+  <!-- foreground: a low periphery for the atlas - wall fragment, basalt, one stand of grass -->
   <div class="fg" data-fg="lessons" aria-hidden="true">
     <span class="fg-el fg-wall fg-el--flip" data-fg-in="right">
       <img src="secret-pathways-assets/foreground/png/temple-wall.webp" alt="" width="1536" height="884" loading="lazy" decoding="async">
@@ -1077,7 +1077,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </span>
   </div>
   <div class="sec-head" data-rv="fade">
-    <span class="k"><b>03</b> — Sacred Craft</span><span class="rule"></span><span class="k jp">手業</span>
+    <span class="k"><b>03</b> - Sacred Craft</span><span class="rule"></span><span class="k jp">手業</span>
   </div>
   <div class="cur-head">
     <h2 class="display h-sec" data-rv="up">Five seals. One verse each. One name to speak.</h2>
@@ -1134,7 +1134,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <img src="secret-pathways-assets/foreground/png/sakura-branch.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async">
     </span>
   </div>
-  <div class="eyebrow" data-rv="fade">Night ends — Moonset</div>
+  <div class="eyebrow" data-rv="fade">Night ends - Moonset</div>
   <h2 class="display" data-rv="up">Moonset</h2>
   <p class="body-lg" data-rv="up">The gate stays open until the moon goes down. Walk it again whenever you like. The path is the same, and the light never is.</p>
   <a class="cta" href="#top" data-rv="fade" data-cursor>
@@ -1201,7 +1201,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <script src="secret-pathways-assets/three.min.js"></script>
 <script>
 /* =====================================================================
-   VERMILION MOON — a live mountain temple, after dark.
+   VERMILION MOON - a live mountain temple, after dark.
    Everything on this page is generated at runtime: no photographs,
    no video, no external assets beyond three.js and two subset fonts.
    ===================================================================== */
@@ -1262,7 +1262,7 @@ function fbm(n, x, y, oct, lac, gain) {
 function cvs(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
 const hex = (r, g, b) => 'rgb(' + (r | 0) + ',' + (g | 0) + ',' + (b | 0) + ')';
 
-/* stacked, up-scaled value noise — 30× faster than a per-pixel fbm and
+/* stacked, up-scaled value noise - 30× faster than a per-pixel fbm and
    indistinguishable once it is multiplied under a dark base colour */
 function fbmCanvas(W, H, seed, octaves, baseCells, contrast) {
   const out = cvs(W, H), o = out.getContext('2d');
@@ -1312,7 +1312,7 @@ function normalFromHeight(hc, strength) {
 }
 
 /* ------------------------------------------------------- 2 · surfaces */
-/* long, wet, board-formed concrete — the sanctuary walls */
+/* long, wet, board-formed concrete - the sanctuary walls */
 function texWall() {
   const W = 1024, H = 1024;
   const c = cvs(W, H), x = c.getContext('2d');
@@ -1360,7 +1360,7 @@ function texWall() {
   return { map: c, normal: normalFromHeight(h, 2.0) };
 }
 
-/* wet slate paving — big slabs, tight joints, standing water */
+/* wet slate paving - big slabs, tight joints, standing water */
 function texFloor() {
   const W = 1024, H = 1024;
   const c = cvs(W, H), x = c.getContext('2d');
@@ -1406,9 +1406,9 @@ function texFloor() {
      1 · ring geometry. A plank is a flat cut through a round log, so the
          rings meet the face as two branches either side of the pith, and
          wherever the cut runs shallow across a ring the branches close into
-         the cathedral arch everyone recognises. Solving the circle for it —
+         the cathedral arch everyone recognises. Solving the circle for it -
          x = pith ± √(r² − d(y)²), with the cut depth d wandering down the
-         board — hands over the arches for free. Drawn strokes only ever give
+         board - hands over the arches for free. Drawn strokes only ever give
          stripes, which is what the first pass here did, and stripes on a
          column read as brushed metal.
      2 · the boards themselves. Joints, and a different tone on either side of
@@ -1432,7 +1432,7 @@ function texWood(seed, opt) {
   hx.fillStyle = '#808080'; hx.fillRect(0, 0, W, H);
   rx.fillStyle = o.rough || '#d6d6d6'; rx.fillRect(0, 0, W, H);
 
-  /* board layout — widths jittered, then normalised so the run closes on the
+  /* board layout - widths jittered, then normalised so the run closes on the
      tile edge and the map still wraps */
   const nb = o.boards === undefined ? 7 : o.boards;
   const cuts = [0];
@@ -1486,7 +1486,7 @@ function texWood(seed, opt) {
         flush();
       }
     }
-    /* pores — the open tooth of cedar, elongated along the grain */
+    /* pores - the open tooth of cedar, elongated along the grain */
     for (let i = 0; i < 220; i++) {
       const px2 = x0 + rnd() * bw, py = rnd() * H, ln = 1.5 + rnd() * 6;
       x.fillStyle = 'rgba(0,0,0,' + (.10 + rnd() * .22) + ')';
@@ -1524,7 +1524,7 @@ function texWood(seed, opt) {
     }
   }
 
-  /* soot, running down the boards rather than pooling in clouds — this is the
+  /* soot, running down the boards rather than pooling in clouds - this is the
      one weathering pass, and it follows the grain because water does */
   for (let i = 0; i < 90; i++) {
     const sx = rnd() * W, top = rnd() * H, ln = H * (.15 + rnd() * .5);
@@ -1540,14 +1540,14 @@ function texWood(seed, opt) {
 /* ------------------------------------------------------------ cut granite
    The lanterns are carved out of one block, so this is a monolith face and
    not coursed masonry: no joints, no bond pattern. What sells it instead is
-   grain and wear —
+   grain and wear -
 
      1 · the speckle. Three mineral populations at three tones: pale feldspar,
          mid quartz, black mica. A granite without visible crystal is grey
          plastic, and it is the one thing a colour ramp cannot fake.
      2 · the chisel. Parallel bruising left by a point on a dressed face, each
          mark a dark gouge with a lit shoulder below it.
-     3 · pitting and fracture, and moss keyed to *those* — moss grows where
+     3 · pitting and fracture, and moss keyed to *those* - moss grows where
          water sits, which is the low ground, so it is read out of the height
          field rather than dropped on as its own cloud. That cloud is what
          made this look like weather rather than stone. */
@@ -1623,7 +1623,7 @@ function texStone(seed, opt) {
     im.data[j]     = lerp(im.data[j],     30, t * .75);
     im.data[j + 1] = lerp(im.data[j + 1], 44, t * .95);
     im.data[j + 2] = lerp(im.data[j + 2], 28, t * .85);
-    /* moss is matte — through the same buffer, because a fillRect per pixel
+    /* moss is matte - through the same buffer, because a fillRect per pixel
        is a quarter of a million canvas calls and costs more than the rest of
        this generator put together */
     rm.data[j] = rm.data[j + 1] = rm.data[j + 2] = lerp(rm.data[j], 255, t * .5);
@@ -1637,7 +1637,7 @@ function texStone(seed, opt) {
    weather: the lacquer has crazed into a fine net, flaked off the edges back to
    the black wood underneath, and run in streaks where the rain came down it.
    So the wood is drawn first and the paint is laid over it at less than full
-   coverage — the grain has to read *through* the red, which is what stops it
+   coverage - the grain has to read *through* the red, which is what stops it
    looking like plastic. */
 function texLacquer() {
   const W = 512, H = 512;
@@ -1662,7 +1662,7 @@ function texLacquer() {
   x.drawImage(fbmCanvas(W, H, 313, 5, 3, 1), 0, 0);
   x.globalAlpha = 1; x.globalCompositeOperation = 'source-over';
 
-  /* craquelure — a wandering net of hairline cracks in the paint film */
+  /* craquelure - a wandering net of hairline cracks in the paint film */
   for (let i = 0; i < 190; i++) {
     let px = rnd() * W, py = rnd() * H, a = rnd() * TAU;
     x.strokeStyle = 'rgba(24,8,6,' + (.28 + rnd() * .4) + ')';
@@ -1732,7 +1732,7 @@ function texShoji() {
   return c;
 }
 
-/* one maple leaf, white on transparent — tinted per instance */
+/* one maple leaf, white on transparent - tinted per instance */
 function texLeaf() {
   const S = 128, c = cvs(S, S), x = c.getContext('2d');
   x.translate(S / 2, S * .92); x.scale(S / 2.2, -S / 2.2);
@@ -1784,7 +1784,7 @@ function texSky() {
   return c;
 }
 
-/* the wooded ridge the valley closes with — black, ragged, mostly fog */
+/* the wooded ridge the valley closes with - black, ragged, mostly fog */
 function texRidge() {
   const W = 2048, H = 512, c = cvs(W, H), x = c.getContext('2d');
   const n = noise2D(1207), rnd = mulberry32(1207);
@@ -1810,7 +1810,7 @@ function texRidge() {
   return c;
 }
 
-/* glazed roof tile — half-round caps running down the slope, weathered */
+/* glazed roof tile - half-round caps running down the slope, weathered */
 function texRoof() {
   const W = 512, H = 512, c = cvs(W, H), x = c.getContext('2d');
   const h = cvs(W, H), hx = h.getContext('2d');
@@ -1830,7 +1830,7 @@ function texRoof() {
     hg.addColorStop(0, '#2c2c2c'); hg.addColorStop(.5, '#eaeaea'); hg.addColorStop(1, '#2c2c2c');
     hx.fillStyle = hg; hx.fillRect(i * s, 0, s, H);
   }
-  /* the courses running down the slope — each tile overlaps the one below */
+  /* the courses running down the slope - each tile overlaps the one below */
   const rnd = mulberry32(211);
   for (let y = 0; y < H; y += H / 9) {
     x.fillStyle = 'rgba(0,0,0,.34)'; x.fillRect(0, y, W, 3.5);
@@ -1854,7 +1854,7 @@ function texRoof() {
    the work, in this order of importance:
 
      1 · the maria. The dark seas are the Moon's signature and they are not
-         fbm — they are a handful of large, lobed, soft-edged basins in a
+         fbm - they are a handful of large, lobed, soft-edged basins in a
          layout everyone has known since childhood. Drawn at their real
          near-side positions and blurred, they are what makes the disc read as
          the Moon at a glance instead of as a planet.
@@ -1865,7 +1865,7 @@ function texRoof() {
          from the same side as the rest of the frame.
 
    The tint is measured off the reference plate, not invented: a blood moon
-   sits at G/R ≈ B/R ≈ .48 — a rose red with green and blue level. Grading it
+   sits at G/R ≈ B/R ≈ .48 - a rose red with green and blue level. Grading it
    as an orange (blue well under green) is what makes a CG moon read as a
    fireball, and that is what this was doing. The disc is authored here in
    near-neutral albedo and the colour is applied once, on the material. */
@@ -1878,7 +1878,7 @@ function texMoon() {
   x.save(); x.clip();
 
   /* highland base. The reference disc is very slightly brighter at the limb,
-     not darker — during totality the rim keeps its forward scatter — so this
+     not darker - during totality the rim keeps its forward scatter - so this
      ramp opens outward instead of falling off. */
   const g = x.createRadialGradient(S * .46, S * .44, S * .05, S / 2, S / 2, R);
   g.addColorStop(0, 'rgb(150,150,150)'); g.addColorStop(.55, 'rgb(158,158,158)');
@@ -1930,7 +1930,7 @@ function texMoon() {
     const [ox, oy] = px(u, v);
     for (let i = 0; i < n; i++) {
       const a = rnd() * TAU, len = R * (.30 + rnd() * rnd() * 1.3);
-      /* start clear of the crater — rays converging on a point read as a
+      /* start clear of the crater - rays converging on a point read as a
          lens flare, and the real ones begin outside the ejecta blanket */
       const t0 = R * (.08 + rnd() * .06);
       const p0 = [ox + Math.cos(a) * t0, oy + Math.sin(a) * t0];
@@ -1952,13 +1952,13 @@ function texMoon() {
   /* --- 3 · the crater field ----------------------------------------------
      A crater is not a ring. Stroked with a gradient running across it, the
      same circle gives a rim lit on the sun side and thrown into shadow on the
-     other — which is the read — where a radial ring gives a bubble. */
+     other - which is the read - where a radial ring gives a bubble. */
   const inSea = (u, v) => seas.some(([su, sv, rad]) =>
     Math.hypot(u - su, (v - sv) * 1.15) < rad * .82);
   for (let i = 0; i < 620; i++) {
     const a = rnd() * TAU, rr = Math.sqrt(rnd()) * .97;
     const u = Math.cos(a) * rr, v = Math.sin(a) * rr;
-    /* the seas are young and nearly unmarked — that contrast is the point */
+    /* the seas are young and nearly unmarked - that contrast is the point */
     if (inSea(u, v) && rnd() > .12) continue;
     const [cx2, cy] = px(u, v);
     const big = rnd() > .975;
@@ -2009,7 +2009,7 @@ function texMoon() {
   return c;
 }
 
-/* soft round falloff — haze, embers, glows */
+/* soft round falloff - haze, embers, glows */
 function texGlow(inner, mid) {
   const S = 256, c = cvs(S, S), x = c.getContext('2d');
   const g = x.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
@@ -2021,7 +2021,7 @@ function texGlow(inner, mid) {
   return c;
 }
 
-/* one wisp — a round mote, not a streak. The whole read is a hard bright
+/* one wisp - a round mote, not a streak. The whole read is a hard bright
    point sitting in a soft halo, so the falloff is deliberately uneven: almost
    all of the light is spent inside the first eighth of the radius and the rest
    is a wide, very faint bloom. A smooth gradient across the full radius gives
@@ -2251,8 +2251,8 @@ function texBranchCutout(seed) {
 /* ================================================================= 4 · gl */
 const canvas = document.getElementById('gl');
 /* The layout viewport, not the window. On mobile `innerWidth` follows the
-   initial containing block, which can run wider than the visual viewport —
-   measured at 437 against a 390 screen — while `clientWidth` tracks what CSS
+   initial containing block, which can run wider than the visual viewport -
+   measured at 437 against a 390 screen - while `clientWidth` tracks what CSS
    actually lays out against. Sizing the canvas from `innerWidth` therefore
    renders a frame wider than the phone shows and drops the right edge of the
    scene off-screen, which is how the wordmark lost its last letter. Every
@@ -2265,7 +2265,7 @@ const LOW = HI === 'low';
 const WANT_POST    = qs('post', '1') !== '0';
 const WANT_SHADOW  = qs('shadow', LOW ? '0' : '1') !== '0';
 const DPR_CAP      = qn('dpr', LOW ? 1.4 : 1.8);
-/* the renderer trades resolution for frame rate on its own — the scene is
+/* the renderer trades resolution for frame rate on its own - the scene is
    fill-bound (five big alpha-blended veils plus a bloom chain), so pixels
    are the only knob worth turning on unknown hardware */
 const PERF = { scale: 1, acc: 0, n: 0, locked: qs('adapt', '1') === '0' };
@@ -2288,7 +2288,7 @@ function initGL() {
   scene = new THREE.Scene();
     /* Density puts the hall back in the air; the colour is what decides how
      dark it is back there. At this depth most of the building's pixel is
-     fog rather than its own material — darkening the timber and the tiles
+     fog rather than its own material - darkening the timber and the tiles
      moved the hall by 0.18 of a luminance unit, the fog colour moves it
      properly. And it reaches by distance, so the foreground does not
      follow it down. */
@@ -2342,7 +2342,7 @@ const lib = (k, f) => (LIB[k] || (LIB[k] = f()));
 const wallWood = () => lib('wallWood', () => texWood(3, { boards: 7 }));
 const postWood = () => lib('postWood', () => texWood(29, { boards: 0 }));
 
-/* sweep a polygonal cross-section along a path — kasagi, shimaki, beams */
+/* sweep a polygonal cross-section along a path - kasagi, shimaki, beams */
 function sweepPoly(points, profile) {
   const segs = points.length, np = profile.length;
   const pos = [], nor = [], uv = [], idx = [];
@@ -2381,7 +2381,7 @@ function sweepPoly(points, profile) {
 }
 /* A temple roof. The height is a concave function of the Chebyshev distance
    from the ridge out to the eave, and the last fifth of that run flares back
-   upward — that lift at the corners is the whole silhouette. Emitted solid:
+   upward - that lift at the corners is the whole silhouette. Emitted solid:
    a top shell, an underside shell, and a fascia stitching the two rims. */
 function roofGeo(A, B, R, Hr, thick, flare) {
   const NX = 52, NZ = 34, FL = flare === undefined ? .30 : flare, e = 1e-3;
@@ -2473,7 +2473,7 @@ const WORLD = {};                 /* named handles the page can animate */
 const swayers = [];               /* things the wind touches */
 
 /* ---- the site plan, in metres ----------------------------------------
-   Everything downstream — camera waypoints, lantern rows, the moon — is
+   Everything downstream - camera waypoints, lantern rows, the moon - is
    pinned to these, so the approach can be re-proportioned in one place. */
 const PODIUM    = 7.0;            /* how far the hall stands above the court */
 const STEPS     = 40;
@@ -2500,9 +2500,9 @@ function buildShell() {
   sky.position.set(0, 62, -108); sky.renderOrder = 0; scene.add(sky);
   WORLD.sky = sky;
 
-  /* the wooded ridge that closes the valley — three-quarters eaten by fog,
+  /* the wooded ridge that closes the valley - three-quarters eaten by fog,
      which is the only reason the ground plane can just stop out there */
-  /* z, centre y, width, height, x — kept low: a crest that climbs past the
+  /* z, centre y, width, height, x - kept low: a crest that climbs past the
      hall's eaves stops reading as distance and starts reading as a cut-out */
   const ridgeMap = tx(texRidge(), { wrap: THREE.RepeatWrapping, repeat: [1.7, 1] });
   [[-90, 13, 300, 26, 0], [-63, 9.5, 210, 19, 16]].forEach((r, i) => {
@@ -2521,7 +2521,7 @@ function buildShell() {
     normalMap: tx(fT.normal, { wrap: THREE.RepeatWrapping, repeat: [7, 7], srgb: false, aniso: 16 }),
     roughnessMap: tx(fT.rough, { wrap: THREE.RepeatWrapping, repeat: [3.4, 3.4], srgb: false }),
     normalScale: new THREE.Vector2(.30, .30),
-    /* The court used to carry a planar mirror and this was tuned to feed it —
+    /* The court used to carry a planar mirror and this was tuned to feed it -
        near-polished, and metal enough to hold a reflection. With the mirror
        gone those numbers only made the paving read as sheet metal, so it goes
        back to being wet stone: rough, barely metallic, and lit rather than
@@ -2535,7 +2535,7 @@ function buildShell() {
 
   /* The podium and the flight use their own material: the mirror shader below
      is only ever attached to the water-level floor, and sharing it would make
-     the reflection buffer sample itself. It is also deliberately matte — with
+     the reflection buffer sample itself. It is also deliberately matte - with
      the floor's metalness the forty risers strobed as the camera drifted. */
   const platMat = new THREE.MeshStandardMaterial({
     map: tx(fT.map, { wrap: THREE.RepeatWrapping, repeat: [3, 1.2], aniso: 16 }),
@@ -2549,7 +2549,7 @@ function buildShell() {
   const cope = new THREE.Mesh(new THREE.BoxGeometry(43, .34, 25), wallMat);
   cope.position.set(0, PODIUM - .17, -45); cope.receiveShadow = true; scene.add(cope);
 
-  /* The flight. Twenty-six risers merged into one buffer — as separate meshes
+  /* The flight. Twenty-six risers merged into one buffer - as separate meshes
      it is twenty-six draw calls for a shape nobody ever gets close to. */
   const treads = [], cheeks = [];
   for (let i = 0; i < STEPS; i++) {
@@ -2580,10 +2580,10 @@ function buildTemple() {
   const gold   = new THREE.MeshStandardMaterial({ color: 0x8f6f2e, roughness: .38, metalness: .78 });
   const rf = lib('roof', () => texRoof());
   /* Nearly a silhouette: the roof carries almost no colour of its own, and
-     what reads on it is relief rather than tone — so the normal goes up as
+     what reads on it is relief rather than tone - so the normal goes up as
      the albedo comes down. */
   const tileMat = surface(rf, [1, 1], { color: 0x2b343a, roughness: .74, metalness: .10, normal: 1.4 });
-  /* the paper the lamps burn through — the only thing in the hall that is
+  /* the paper the lamps burn through - the only thing in the hall that is
      allowed to be bright, and even then only just above white */
   const paper = new THREE.MeshBasicMaterial({ color: hdr(1.06, .48, .18), fog: true, toneMapped: false });
   const grid  = new THREE.MeshBasicMaterial({ map: tx(texShoji()), transparent: true,
@@ -2598,7 +2598,7 @@ function buildTemple() {
     s.position.set(x, y, z + .06); s.renderOrder = 3; g.add(s);
   }
   /* The block-and-arm band that carries every eave. The pieces are merged, so
-     they carry absolute coordinates — TEMPLE_Z has to go in here, not on the
+     they carry absolute coordinates - TEMPLE_Z has to go in here, not on the
      mesh, or the whole band ends up hanging in the air by the camera. */
   function brackets(halfW, halfD, y, step) {
     const parts = [];
@@ -2691,7 +2691,7 @@ function buildTemple() {
   spill.position.set(0, F + 3.0, TEMPLE_Z + 5.6); spill.renderOrder = 2;
   scene.add(spill); WORLD.hallHalo = spill;
 
-  /* the band of mist that separates the hall from the trees behind it — the
+  /* the band of mist that separates the hall from the trees behind it - the
      one thing that stops the whole background reading as a single flat cut-out */
   const mist = new THREE.Mesh(new THREE.PlaneGeometry(64, 20),
     new THREE.MeshBasicMaterial({ map: tx(texGlow('rgba(150,178,190,.62)', 'rgba(104,138,154,.20)')),
@@ -2700,7 +2700,7 @@ function buildTemple() {
 }
 
 /* --------------------------------------------------- the vermilion moon
-   Hung well behind the hall so the roof crosses its lower left — near
+   Hung well behind the hall so the roof crosses its lower left - near
    enough to the ridge to sit in the mist, far enough that it never moves
    against the buildings when the rig drifts.                             */
 const MOON = { x: 17.9, y: 31.9, z: -72, r: 8.6 };
@@ -2716,7 +2716,7 @@ function buildMoon() {
   disc.position.set(MOON.x, MOON.y, MOON.z); disc.renderOrder = 1;
   scene.add(disc); WORLD.moon = disc;
 
-  /* the air around it — a wide, weak corona that the bloom picks up */
+  /* the air around it - a wide, weak corona that the bloom picks up */
   const halo = new THREE.Mesh(new THREE.PlaneGeometry(MOON.r * 6.4, MOON.r * 6.4),
     new THREE.MeshBasicMaterial({ map: tx(texGlow('rgba(255,124,112,.90)', 'rgba(206,52,48,.26)')),
       transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: .44 }));
@@ -2724,7 +2724,7 @@ function buildMoon() {
   scene.add(halo); WORLD.moonHalo = halo;
 }
 /* On a tall frame the rig steps back and its horizontal reach narrows, which
-   would slide the moon off the right edge — draw it in by the same amount. */
+   would slide the moon off the right edge - draw it in by the same amount. */
 function placeMoon() {
   if (!WORLD.moon) return;
   const x = MOON.x * (1 - .40 * aspectFix());
@@ -2761,17 +2761,17 @@ function buildTorii() {
     });
   });
 
-  /* nuki — the straight beam that pierces the columns */
+  /* nuki - the straight beam that pierces the columns */
   const nuki = new THREE.Mesh(new THREE.BoxGeometry(9.4, .52, .46), lac);
   nuki.position.set(0, BASE + H - 2.15, 0); nuki.castShadow = true; g.add(nuki);
 
-  /* gakuzuka — the little strut at the centre */
+  /* gakuzuka - the little strut at the centre */
   const gak = new THREE.Mesh(new THREE.BoxGeometry(.46, 1.22, .40), lac);
   gak.position.set(0, BASE + H + .10, 0); g.add(gak);
   const gakG = new THREE.Mesh(new THREE.BoxGeometry(.60, .18, .50), gold);
   gakG.position.set(0, BASE + H + .68, 0); g.add(gakG);
 
-  /* shimaki + kasagi — the two crowning beams, swept upward at the ends */
+  /* shimaki + kasagi - the two crowning beams, swept upward at the ends */
   function beamPath(half, rise, power) {
     const p = [];
     for (let i = 0; i <= 26; i++) {
@@ -2793,10 +2793,10 @@ function buildTorii() {
     new THREE.MeshStandardMaterial({ color: 0x120c0c, roughness: .42, metalness: .14 }));
   cap.position.set(0, BASE + H + .96, 0); g.add(cap);
 
-  /* the gate stands at the foot of the flight, not over the court — small
+  /* the gate stands at the foot of the flight, not over the court - small
      enough that the hall keeps the top of the frame to itself */
   /* The lowest thing on the gate is the foot of each column, and it starts
-     at BASE — so anchoring the group at y=0 left the whole torii hanging
+     at BASE - so anchoring the group at y=0 left the whole torii hanging
      BASE*scale above the court. Drop it by exactly that and the feet land. */
   const GS = .72;
   g.position.set(0, -BASE * GS, -8.6); g.scale.setScalar(GS);
@@ -2967,8 +2967,8 @@ function cutoutMaterial(canvasEl, sway) {
       'float ph = position.x*0.30 + float(gl_InstanceID)*0.0;\n' +
       'transformed.x += sin(uT*0.85 + ph)*uSway*h*h;\n' +
       'transformed.y += cos(uT*0.62 + ph*1.7)*uSway*0.35*h*h;\n');
-    /* These plates are drawn to the edge of their own canvas — the grass runs
-       straight off the left and the bottom — so every sheet ends on a hard
+    /* These plates are drawn to the edge of their own canvas - the grass runs
+       straight off the left and the bottom - so every sheet ends on a hard
        straight line wherever its plane stops. Feathering the alpha at the
        edges lets each one dissolve into the scene instead of being cut out of
        it. Sides get the widest margin because that is where a bank of grass
@@ -3171,12 +3171,12 @@ function buildAtmosphere() {
    the rig rather than to the court: every leaf keeps a real world position so
    its drift is honest, but any leaf that ends up further than LEAF_R from the
    camera in x or z is wrapped back across it. That way the count is what one
-   screenful needs — a hundred and seventy — instead of what filling the whole
+   screenful needs - a hundred and seventy - instead of what filling the whole
    valley would cost, and the frame is never empty however far the walk goes.
 
    A falling leaf is read by its tumble, not by its path. Each one turns on
    two axes at its own rate, so it presents its face, thins to an edge and
-   comes back — which is the whole reason these are instanced quads and not
+   comes back - which is the whole reason these are instanced quads and not
    points, since a point sprite cannot turn away from the camera. */
 /* LEAF_AHEAD/LEAF_SPREAD is the disc leaves are recycled into, hung down the
    camera's own sight line; LEAF_R is only the far backstop for a rig that has
@@ -3212,7 +3212,7 @@ function updateLeaves(dt) {
   const LV = WORLD.leaves; if (!LV) return;
   const cy = camera.position.y, L = LV.list;
   /* Respawn ahead of the rig, not around it. A band centred on the camera
-     spends nearly all of itself behind and beside the frustum — of a couple of
+     spends nearly all of itself behind and beside the frustum - of a couple of
      hundred leaves only a dozen were ever on screen. Recycling them into the
      cone the camera is actually looking down puts the same count in frame
      several times over, and costs nothing. */
@@ -3234,7 +3234,7 @@ function updateLeaves(dt) {
       l.z = fz + Math.sin(a) * r;
     }
     /* the far wrap is a backstop for a rig that has walked away from its own
-       leaves — it sits well outside the fog, so nothing is seen to jump */
+       leaves - it sits well outside the fog, so nothing is seen to jump */
     const cx = camera.position.x, cz = camera.position.z;
     if (l.x - cx > LEAF_R) l.x -= 2 * LEAF_R; else if (l.x - cx < -LEAF_R) l.x += 2 * LEAF_R;
     if (l.z - cz > LEAF_R) l.z -= 2 * LEAF_R; else if (l.z - cz < -LEAF_R) l.z += 2 * LEAF_R;
@@ -3257,7 +3257,7 @@ function updateLeaves(dt) {
    It hangs as a child of the camera, so the pointer maps straight into camera
    space through the frustum's own half-height. Unprojecting onto a world
    plane each frame would instead pin the trail to the court, and the rig is
-   always drifting — the wisps would swim across the screen whenever the
+   always drifting - the wisps would swim across the screen whenever the
    camera moved rather than staying under the hand.
 
    Emission is by distance travelled, not elapsed time. A slow hand then lays
@@ -3269,8 +3269,8 @@ const WISP = { list: [], i: 0, acc: 0, ex: 0, ey: 0, lx: 0, ly: 0, idle: 0, seen
 function buildWisps() {
   if (COARSE) return;
   /* The motes are round, so nothing here is oriented: no per-particle angle,
-     no rotated lookup. They are also small — a few pixels of core inside a
-     faint halo — which is what lets the count go up without the additive fill
+     no rotated lookup. They are also small - a few pixels of core inside a
+     faint halo - which is what lets the count go up without the additive fill
      that a screenful of big sprites costs. */
   const N = LOW ? 90 : 190;
   const g = new THREE.BufferGeometry();
@@ -3379,7 +3379,7 @@ function updateWisps(dt) {
 /* ====================================================== cloth · the plates
    Canvas UI's Cloth, ported off React and off the experimental html-in-canvas
    path it ships with. That path exists so the effect can hang arbitrary live
-   HTML on the fabric — it captures the subtree with drawElementImage(), which
+   HTML on the fabric - it captures the subtree with drawElementImage(), which
    is Chrome-behind-a-flag only, and the component falls back to a flat render
    everywhere else.
 
@@ -3393,7 +3393,7 @@ function updateWisps(dt) {
    The grid is the component's 96 squared. Three of these on one page is a
    third of a million cell updates a second, so each one hard-stops when its
    card leaves the viewport and again once the wind dies and the fabric has
-   settled — both already in the component, and both load-bearing here. */
+   settled - both already in the component, and both load-bearing here. */
 const CLOTH_VERT = `#version 300 es
 precision highp float;
 layout(location = 0) in vec2 aGrid;
@@ -3822,7 +3822,7 @@ function createCloth(output, plate, options) {
 }
 
 /* the plate: the card's own still, cover-cropped, carrying the two scrims the
-   CSS used to lay over it — baked in so they ripple with the cloth instead of
+   CSS used to lay over it - baked in so they ripple with the cloth instead of
    sitting flat on top of it */
 function clothPlate(img, w, h) {
   const c = cvs(Math.max(1, w | 0), Math.max(1, h | 0)), x = c.getContext('2d');
@@ -3887,14 +3887,14 @@ function buildLights() {
   scene.add(key); WORLD.key = key;
 
   /* moonlight: no shadow, no fill, purely a rim down the right-hand slope of
-     every roof — without it the hall is a flat black cut-out against the sky */
+     every roof - without it the hall is a flat black cut-out against the sky */
   const moonKey = new THREE.DirectionalLight(0xff6a42, .52);
   moonKey.position.set(26, 30, -60);
   moonKey.target.position.set(0, 8, -40); scene.add(moonKey.target);
   scene.add(moonKey);
 
   /* The hall's own lamps. They light the podium and the top of the flight and
-     nothing else — a range that reaches the roof turns the whole building into
+     nothing else - a range that reaches the roof turns the whole building into
      a paper lantern and the silhouette disappears. */
   const hallL = new THREE.PointLight(0xff8a26, 2.3, 15, 2);
   hallL.position.set(0, PODIUM + 1.2, TEMPLE_Z + 8.6); scene.add(hallL); WORLD.hallLight = hallL;
@@ -3911,7 +3911,7 @@ function buildLights() {
   const fill = new THREE.PointLight(0x86c6d2, 0.95, 30, 2);
   fill.position.set(-1, 13.5, -16.0); scene.add(fill);
 
-  /* the flight is the spine of the composition — without a lamp of its own it
+  /* the flight is the spine of the composition - without a lamp of its own it
      falls into the same black as the ground and the eye has nothing to climb */
   const stairL = new THREE.PointLight(0xffa049, 4.2, 17, 2);
   stairL.position.set(0, 7.6, -26.0); scene.add(stairL);
@@ -4070,7 +4070,7 @@ function applyCamera() {
   const io = 1 - RIG.intro;
   _p.z += io * 5.6; _p.y += io * 0.65; fov += io * 8;
 
-  /* parallax — a hand-held drift, never enough to break the frame */
+  /* parallax - a hand-held drift, never enough to break the frame */
   const par = 1 - smooth(0, 1.6, RIG.smooth) * .55;
   _p.x += RIG.mx * 0.62 * par; _p.y += RIG.my * 0.34 * par;
   _t.x -= RIG.mx * 0.20 * par; _t.y -= RIG.my * 0.12 * par;
@@ -4117,7 +4117,7 @@ function layoutWord() {
   const L = hit(-1, 0), R = hit(1, 0);
   /* Judge the frame by its shape, not its width. What forces the word up and
      in is a *tall* frame, and a 768-wide tablet held upright is as tall as a
-     phone — on a width test it took the desktop baseline and sat below the
+     phone - on a width test it took the desktop baseline and sat below the
      fold with only the top of the G showing. */
   const narrow = vpW() / vpH() < 1.05;
   /* Four wide-tracked letters reach the frame edge exactly; pushing past it,
@@ -4194,7 +4194,7 @@ function splitHeadingWords() {
    remains there just long enough to blur and fade out before returning home.
 
    While it holds that plane the stage is re-parented into #fg-sky, which lives
-   outside .page and so is not capped by its stacking context — that is the
+   outside .page and so is not capped by its stacking context - that is the
    only way a cut-out can pass in front of the nav and the chapter rail. The
    move costs nothing in layout: the stage is position:fixed either way, and
    its placement rules key off [data-fg], not off the section it came from. */
@@ -4307,7 +4307,7 @@ function wireHeroExit() {
     on = true;
     seq.forEach(o => {
       /* these carry the reveal's own .9s opacity transition, which would
-         animate every value written here — the fade would then trail the
+         animate every value written here - the fade would then trail the
          scroll by most of a second and stop reading as scroll-driven */
       o.el.style.transition = 'none';
       const a = 1 - smooth(o.at, o.at + o.span, t);
@@ -4361,7 +4361,7 @@ function wireNav() {
   addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
   addEventListener('resize', () => { if (vpW() > 820) closeMenu(); }, { passive:true });
   /* Which chapter each link actually points at, read off its href. The old
-     rule was positional — link i lit for section i+1 — which silently assumed
+     rule was positional - link i lit for section i+1 - which silently assumed
      one link per section in matching order. With five links over four chapters
      every entry past the third lit for its neighbour: standing in Afterlight
      highlighted Stories. Reading the destination cannot drift. */
@@ -4453,7 +4453,7 @@ function buildCards() {
     el.addEventListener('mouseleave', () => c.userData.want = 0);
   });
 }
-/* A render target keeps its own viewport/scissor — renderer.setScissor()
+/* A render target keeps its own viewport/scissor - renderer.setScissor()
    only ever reaches the default framebuffer, so the region has to be set on
    whichever surface we are actually drawing into, and re-bound to take. */
 const _push = new THREE.Vector3();
@@ -4502,10 +4502,10 @@ function aimCard(C, aspect) {
   c.lookAt(u.look);
 }
 /* Each viewport keeps its own buffer and only re-renders when it is moving
-   or when its slot in the refresh rota comes round — the views are static,
+   or when its slot in the refresh rota comes round - the views are static,
    so paying for four scene traversals every frame buys nothing. */
 /* The blit lands in the composite at the element's screen rect, and the canvas
-   knows nothing about the DOM stacked over it — so a card the page has faded
+   knows nothing about the DOM stacked over it - so a card the page has faded
    goes on painting a live view into the frame with no card around it, which is
    what put a second lit hall in the corner once the hero exit started dimming
    the preview. Cull on the element's effective opacity, not just its rect.
@@ -4599,7 +4599,7 @@ function updateWorld(dt) {
   const f = RIG.focusAmt;
   if (WORLD.hallHalo) WORLD.hallHalo.material.opacity = .30 + f * .14 + Math.sin(clock * .6) * .035;
   if (WORLD.hallLight) WORLD.hallLight.intensity = 3.4 * (1 + f * .30) * (1 + Math.sin(clock * .43) * .045);
-  /* the moon only breathes — the haze in front of it is what actually moves */
+  /* the moon only breathes - the haze in front of it is what actually moves */
   if (WORLD.moonHalo) WORLD.moonHalo.material.opacity = .44 + f * .10 + Math.sin(clock * .34) * .05;
   if (WORLD.lanternLights) WORLD.lanternLights.forEach((l, i) => {
     l.intensity = 2.6 * (1 + f * .55) * (.86 + .22 * Math.sin(clock * (2.3 + i * .7) + i * 2.1) + .1 * pulse);
@@ -4706,7 +4706,7 @@ const JOBS = [
   ['Placing the stones', () => {
     buildRocks();
     buildLantern(7.4, -7.0, 1.15); buildLantern(-7.6, -5.2, 1.0);
-    /* The pairs flanking the flight were given flat heights — 2 and PODIUM —
+    /* The pairs flanking the flight were given flat heights - 2 and PODIUM -
        and the flight does not reach either at those depths, so both pairs hung
        in the air. Solve the step under each one from the same constants the
        treads and cheeks are built from, and they stand on the rail instead of
@@ -4733,7 +4733,7 @@ const JOBS = [
     WORLD.fg.forEach(m => m.layers.set(1));
     WORD.glyphs.forEach(m => m.layers.set(2));
     if (WORLD.rain) WORLD.rain.layers.set(1);
-    /* the fall is all around the rig, including behind it — mirroring it
+    /* the fall is all around the rig, including behind it - mirroring it
        would drop leaves into the water that are nowhere near the water */
     if (WORLD.leaves) WORLD.leaves.mesh.layers.set(1);
     WORLD.ripples.forEach(r => r.layers.set(1));
