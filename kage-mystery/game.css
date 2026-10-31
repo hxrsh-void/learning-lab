@@ -1,0 +1,73 @@
+/* ===== KAGE: The Five Seals — game layer ===== */
+#kg-hud{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;
+  display:none;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(223,231,224,.13);
+  border-radius:999px;background:rgba(5,7,10,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#kg-hud.on{display:flex}
+.kg-slot{width:32px;height:32px;border:1px solid rgba(223,231,224,.16);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:#78837c;
+  font-family:'NotoJP',serif;transition:all .5s cubic-bezier(.22,.61,.36,1)}
+.kg-slot.got{border-color:#c9a24a;color:#c9a24a;box-shadow:0 0 14px rgba(201,162,74,.4);background:rgba(201,162,74,.08)}
+#kg-timer{font-size:12px;letter-spacing:.12em;color:#aab4ad;font-variant-numeric:tabular-nums;margin-left:4px}
+.kg-icon{width:32px;height:32px;border:1px solid rgba(223,231,224,.16);border-radius:50%;
+  background:transparent;color:#aab4ad;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-family:'Onest',sans-serif}
+.kg-icon:active{border-color:#aab4ad}
+/* orb */
+#kg-orb{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:70;
+  width:66px;height:66px;border-radius:50%;border:1px solid rgba(224,35,28,.6);cursor:pointer;
+  display:none;align-items:center;justify-content:center;flex-direction:column;
+  background:radial-gradient(circle at 50% 40%, rgba(224,35,28,.4), rgba(5,7,10,.85) 75%);
+  box-shadow:0 0 26px rgba(224,35,28,.45), inset 0 0 18px rgba(224,35,28,.3);
+  animation:kg-breathe 2.6s ease-in-out infinite;font-family:'NotoJP',serif;
+  -webkit-tap-highlight-color:transparent}
+#kg-orb.on{display:flex}
+#kg-orb .kg-orb-glyph{font-size:26px;color:#ff8a6a;line-height:1;text-shadow:0 0 14px rgba(255,90,60,.8)}
+#kg-orb .kg-orb-label{font-family:'Onest',sans-serif;font-size:8.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#aab4ad;margin-top:3px}
+#kg-orb.gold{border-color:rgba(201,162,74,.8);
+  background:radial-gradient(circle at 50% 40%, rgba(201,162,74,.45), rgba(5,7,10,.85) 75%);
+  box-shadow:0 0 30px rgba(201,162,74,.55), inset 0 0 18px rgba(201,162,74,.3)}
+#kg-orb.gold .kg-orb-glyph{color:#e8c46a;text-shadow:0 0 14px rgba(201,162,74,.9)}
+@keyframes kg-breathe{50%{transform:scale(1.09);box-shadow:0 0 40px rgba(224,35,28,.65), inset 0 0 22px rgba(224,35,28,.4)}}
+#kg-orb.gold{animation-name:kg-breathe-gold}
+@keyframes kg-breathe-gold{50%{transform:scale(1.09);box-shadow:0 0 44px rgba(201,162,74,.75), inset 0 0 22px rgba(201,162,74,.45)}}
+/* overlays */
+.kg-overlay{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;
+  padding:22px;background:rgba(3,5,8,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:1;transition:opacity .6s cubic-bezier(.22,.61,.36,1)}
+.kg-overlay.kg-hidden{opacity:0;pointer-events:none}
+.kg-panel{max-width:540px;width:100%;text-align:center;max-height:92vh;overflow-y:auto;color:#dfe7e0;
+  font-family:'Onest',system-ui,sans-serif;font-weight:300}
+.kg-kicker{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#ff5a3c;margin-bottom:14px}
+.kg-title{font-family:'NotoJP',serif;font-weight:700;font-size:clamp(38px,8vw,58px);
+  letter-spacing:.14em;margin:0 0 6px}
+.kg-sub{font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;color:#aab4ad;margin-bottom:24px}
+.kg-story{font-size:15px;line-height:1.75;color:#aab4ad;margin:0 auto 28px;max-width:470px}
+.kg-story b{color:#dfe7e0;font-weight:400}
+.kg-btn{display:inline-block;padding:14px 38px;border:1px solid #e0231c;color:#dfe7e0;
+  background:linear-gradient(180deg,rgba(224,35,28,.22),rgba(224,35,28,.08));
+  font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;
+  transition:all .3s;border-radius:2px;font-family:'Onest',sans-serif;font-weight:400}
+.kg-btn:hover,.kg-btn:active{background:#e0231c;color:#fff;box-shadow:0 0 30px rgba(224,35,28,.45)}
+.kg-tip{margin-top:24px;font-size:11.5px;color:#78837c;letter-spacing:.08em;line-height:1.8}
+.kg-glyph{font-family:'NotoJP',serif;font-size:70px;color:#c9a24a;margin-bottom:6px;
+  text-shadow:0 0 36px rgba(201,162,74,.55)}
+.kg-sealname{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:#ff5a3c;margin-bottom:18px}
+.kg-verse{font-family:'NotoJP',serif;font-size:18px;line-height:1.9;color:#dfe7e0;margin-bottom:20px}
+.kg-keyword{font-size:13px;color:#c9a24a;letter-spacing:.1em;margin-bottom:24px}
+.kg-keyword span{border-bottom:1px solid #c9a24a;padding-bottom:2px}
+.kg-count{font-size:11px;letter-spacing:.28em;color:#78837c;text-transform:uppercase;margin-bottom:22px}
+.kg-choice{display:block;width:100%;margin:0 0 12px;padding:15px;border:1px solid rgba(223,231,224,.13);
+  border-radius:2px;background:rgba(10,14,18,.6);color:#dfe7e0;font-size:15.5px;cursor:pointer;
+  font-family:'NotoJP',serif;letter-spacing:.05em;transition:all .25s}
+.kg-choice:hover,.kg-choice:active{border-color:#e0231c;background:rgba(224,35,28,.12)}
+.kg-shake{animation:kg-shake .5s}
+@keyframes kg-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(4px)}}
+.kg-stats{font-size:13px;color:#aab4ad;letter-spacing:.12em;margin:16px 0 26px;line-height:2}
+.kg-stats b{color:#c9a24a;font-weight:400}
+.kg-credit{margin-top:26px;font-size:11px;color:#78837c;letter-spacing:.1em}
+.kg-credit a{color:#aab4ad}
+#kg-fade{position:fixed;inset:0;z-index:78;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 45%, #f6e9c8, #c9a24a 55%, #05070a 130%);
+  transition:opacity 2.2s cubic-bezier(.22,.61,.36,1)}
+#kg-fade.on{opacity:1}
