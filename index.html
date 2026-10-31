@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taskly — To-do list</title>
+<style>
+:root{--bg:#f5f6fb;--panel:#fff;--text:#202238;--muted:#85899e;--line:#eceef4;--accent:#6c63ff;--accent2:#eeeaff;--shadow:0 18px 55px rgba(37,40,75,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text);min-height:100vh}
+button,input,select{font:inherit}.app{max-width:1080px;margin:0 auto;padding:42px 24px 60px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{display:flex;align-items:center;gap:11px;font-size:22px;font-weight:800;letter-spacing:-.7px}.logo{width:39px;height:39px;border-radius:13px;background:var(--accent);display:grid;place-items:center;color:white;font-size:21px;box-shadow:0 7px 18px #6c63ff55}
+.header-right{display:flex;align-items:center;gap:12px}.date{color:var(--muted);font-size:13px}.theme{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:12px;width:40px;height:40px;cursor:pointer;font-size:17px}
+.welcome{margin-bottom:27px}.welcome h1{font-size:clamp(28px,5vw,38px);letter-spacing:-1.5px;margin:0 0 7px}.welcome p{margin:0;color:var(--muted);font-size:15px}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start}
+.sidebar,.main{background:var(--panel);border:1px solid var(--line);border-radius:21px;box-shadow:var(--shadow)}
+.sidebar{padding:22px}.side-label{font-size:11px;font-weight:800;letter-spacing:1.2px;color:var(--muted);margin:2px 0 13px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:12px;color:#62667c;cursor:pointer;margin:3px 0;font-size:14px;transition:.2s}.nav:hover,.nav.active{background:var(--accent2);color:var(--accent);font-weight:700}.count{font-size:12px;color:var(--muted)}
+.progress-card{margin-top:27px;padding:16px;background:linear-gradient(135deg,#f0eeff,#f9f8ff);border-radius:15px}.progress-card strong{font-size:14px}.progress-card p{font-size:12px;color:#77768d;margin:5px 0 12px}.bar{height:7px;background:#dedafc;border-radius:9px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:var(--accent);border-radius:9px;transition:.3s}
+.main{padding:25px 27px;min-height:510px}.main-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:21px}.main-top h2{font-size:21px;letter-spacing:-.5px;margin:0}.task-total{font-size:12px;color:var(--muted)}
+.add-form{display:flex;gap:9px;margin-bottom:20px}.add-form input{min-width:0;flex:1;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:13px 14px;outline:none;color:var(--text)}.add-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #6c63ff18}.add-btn{border:0;border-radius:12px;background:var(--accent);color:white;padding:0 18px;font-weight:700;cursor:pointer}.add-btn:hover{filter:brightness(1.08)}
+.tools{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:13px}.filters{display:flex;gap:5px;flex-wrap:wrap}.filter{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:9px;font-size:12px;cursor:pointer}.filter.active{background:var(--accent2);color:var(--accent);font-weight:700}.sort{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:9px;padding:7px 9px;font-size:12px}
+.task-list{display:flex;flex-direction:column;gap:9px}.task{display:flex;align-items:center;gap:12px;padding:14px 13px;border:1px solid var(--line);border-radius:13px;transition:.2s}.task:hover{border-color:#d8d4ff;transform:translateY(-1px)}.check{width:19px;height:19px;flex:none;border:1.7px solid #c9cada;border-radius:50%;cursor:pointer;display:grid;place-items:center;color:white;font-size:12px}.task.done .check{background:var(--accent);border-color:var(--accent)}.task-content{flex:1;min-width:0}.task-title{font-size:14px;overflow-wrap:anywhere}.task.done .task-title{text-decoration:line-through;color:var(--muted)}.meta{display:flex;gap:9px;align-items:center;margin-top:5px;color:var(--muted);font-size:11px}.priority{padding:3px 7px;border-radius:6px;background:#fff0e9;color:#e47b42}.priority.medium{background:#fff7df;color:#b88a22}.priority.low{background:#eaf7ef;color:#399b62}.task-actions{display:flex;gap:5px}.icon-btn{border:0;background:transparent;color:#a0a2b2;cursor:pointer;border-radius:7px;padding:6px}.icon-btn:hover{background:var(--bg);color:var(--text)}.empty{text-align:center;padding:65px 15px;color:var(--muted)}.empty .emoji{font-size:34px;margin-bottom:10px}.empty strong{display:block;color:var(--text);font-size:15px;margin-bottom:5px}.empty span{font-size:12px}
+footer{text-align:center;color:#a1a4b5;font-size:11px;margin-top:22px}
+body.dark{--bg:#171824;--panel:#222433;--text:#f2f2fa;--muted:#a1a4b8;--line:#34364a;--accent:#9189ff;--accent2:#34304f;--shadow:0 18px 55px rgba(0,0,0,.18)}body.dark .progress-card{background:#302d48}body.dark .progress-card p{color:#c1bddb}body.dark .bar{background:#484264}body.dark .add-form input{background:#1b1d2b}body.dark .priority{background:#49352e}body.dark .priority.medium{background:#49412a}body.dark .priority.low{background:#294234}
+@media(max-width:720px){.app{padding:25px 14px 40px}.layout{grid-template-columns:1fr}.sidebar{padding:15px}.sidebar .side-label,.progress-card{display:none}.nav-wrap{display:flex;gap:5px;overflow:auto}.nav{white-space:nowrap;margin:0;padding:10px}.main{padding:20px 15px}.date{display:none}.main-top{margin-bottom:17px}.add-btn{padding:0 14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">✓</div>taskly</div><div class="header-right"><span class="date" id="today"></span><button class="theme" id="theme" aria-label="Toggle dark mode">☾</button></div></header>
+<section class="welcome"><h1>Stay on top of it.</h1><p>A little progress each day adds up to big results.</p></section>
+<div class="layout">
+<aside class="sidebar"><div class="side-label">YOUR WORKSPACE</div><div class="nav-wrap">
+<div class="nav active" data-filter="all"><span>✦ &nbsp; All tasks</span><span class="count" id="allCount">0</span></div>
+<div class="nav" data-filter="active"><span>◷ &nbsp; In progress</span><span class="count" id="activeCount">0</span></div>
+<div class="nav" data-filter="completed"><span>✓ &nbsp; Completed</span><span class="count" id="doneCount">0</span></div>
+</div><div class="progress-card"><strong>Your daily progress</strong><p id="progressText">You're just getting started.</p><div class="bar"><span id="progressBar"></span></div></div></aside>
+<main class="main"><div class="main-top"><h2 id="sectionTitle">All tasks</h2><span class="task-total" id="taskTotal">0 tasks</span></div>
+<form class="add-form" id="addForm"><input id="taskInput" placeholder="What needs to get done?" maxlength="140" autocomplete="off" required><button class="add-btn" type="submit">＋ Add task</button></form>
+<div class="tools"><div class="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="active">Active</button><button class="filter" data-filter="completed">Completed</button></div><select class="sort" id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="az">A–Z</option></select></div>
+<div class="task-list" id="taskList"></div>
+</main></div><footer>Your tasks stay saved on this device · Made for getting things done</footer>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+let tasks=JSON.parse(localStorage.getItem('taskly-tasks')||'[]'),filter='all';
+const today=new Date();$('#today').textContent=today.toLocaleDateString(undefined,{weekday:'short',month:'long',day:'numeric'});
+function save(){localStorage.setItem('taskly-tasks',JSON.stringify(tasks));render()}
+function render(){
+ const active=tasks.filter(t=>!t.done).length,done=tasks.length-active;
+ $('#allCount').textContent=tasks.length;$('#activeCount').textContent=active;$('#doneCount').textContent=done;
+ $('#taskTotal').textContent=`${tasks.length} ${tasks.length===1?'task':'tasks'}`;
+ const pct=tasks.length?Math.round(done/tasks.length*100):0;$('#progressBar').style.width=pct+'%';
+ $('#progressText').textContent=tasks.length?`${pct}% complete · ${done} of ${tasks.length} done`:"You're just getting started.";
+ $('#sectionTitle').textContent=filter==='all'?'All tasks':filter==='active'?'In progress':'Completed';
+ let shown=tasks.filter(t=>filter==='all'||(filter==='active'&&!t.done)||(filter==='completed'&&t.done));
+ const sort=$('#sort').value;shown.sort((a,b)=>sort==='az'?a.title.localeCompare(b.title):sort==='oldest'?a.created-b.created:b.created-a.created);
+ const list=$('#taskList');list.innerHTML='';
+ if(!shown.length){list.innerHTML=`<div class="empty"><div class="emoji">${filter==='completed'?'🎯':'📝'}</div><strong>${filter==='completed'?'Nothing completed yet':'All clear!'}</strong><span>${filter==='active'?'You have no tasks in progress.':filter==='completed'?'Finish a task and it will show up here.':'Add a task above and make today count.'}</span></div>`;return}
+ shown.forEach(t=>{const el=document.createElement('div');el.className='task'+(t.done?' done':'');
+ const check=document.createElement('button');check.className='check';check.setAttribute('aria-label',t.done?'Mark active':'Complete task');check.textContent=t.done?'✓':'';
+ check.onclick=()=>{t.done=!t.done;save()};
+ const content=document.createElement('div');content.className='task-content';
+ const title=document.createElement('div');title.className='task-title';title.textContent=t.title;
+ const meta=document.createElement('div');meta.className='meta';const date=document.createElement('span');date.textContent=new Date(t.created).toLocaleDateString(undefined,{month:'short',day:'numeric'});
+ const priority=document.createElement('span');priority.className='priority '+t.priority;priority.textContent=t.priority+' priority';meta.append(date,priority);content.append(title,meta);
+ const actions=document.createElement('div');actions.className='task-actions';
+ const edit=document.createElement('button');edit.className='icon-btn';edit.textContent='✎';edit.title='Edit task';edit.onclick=()=>{const value=prompt('Edit your task:',t.title);if(value&&value.trim()){t.title=value.trim();save()}};
+ const del=document.createElement('button');del.className='icon-btn';del.textContent='×';del.title='Delete task';del.onclick=()=>{if(confirm('Delete this task?')){tasks=tasks.filter(x=>x.id!==t.id);save()}};
+ actions.append(edit,del);el.append(check,content,actions);list.append(el);
+ });
+}
+$('#addForm').addEventListener('submit',e=>{e.preventDefault();const input=$('#taskInput'),title=input.value.trim();if(!title)return;tasks.unshift({id:Date.now()+Math.random(),title,done:false,priority:'medium',created:Date.now()});input.value='';save();input.focus()});
+function setFilter(f){filter=f;document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===f));render()}
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.filter)));
+$('#sort').addEventListener('change',render);
+$('#theme').onclick=()=>{document.body.classList.toggle('dark');$('#theme').textContent=document.body.classList.contains('dark')?'☀':'☾';localStorage.setItem('taskly-dark',document.body.classList.contains('dark'))};
+if(localStorage.getItem('taskly-dark')==='true'){document.body.classList.add('dark');$('#theme').textContent='☀'}
+render();
+</script>
+</body></html>
