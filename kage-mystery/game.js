@@ -101,9 +101,10 @@ CHAPTERS.forEach(function(c){
   var s = el('div', 'kg-slot', c.glyph); s.id = 'kg-slot-' + c.id; hud.appendChild(s);
 });
 var timer = el('span', '', '00:00'); timer.id = 'kg-timer'; hud.appendChild(timer);
-var hintBtn = el('button', 'kg-icon', '?'); hintBtn.id = 'kg-hint'; hintBtn.title = 'Hint'; hud.appendChild(hintBtn);
+var hintBtn = el('button', 'kg-help-btn', '? Help'); hintBtn.id = 'kg-hint'; hintBtn.title = 'How to play, your clues, and hints'; hud.appendChild(hintBtn);
 var muteBtn = el('button', 'kg-icon', '♪'); muteBtn.id = 'kg-mute'; muteBtn.title = 'Sound'; hud.appendChild(muteBtn);
 root.appendChild(hud);
+var goal = el('div', '', ''); goal.id = 'kg-goal'; root.appendChild(goal);
 
 /* orb */
 var orb = el('button', '', '<span class="kg-orb-glyph">門</span><span class="kg-orb-label">a seal stirs</span>');
@@ -127,9 +128,15 @@ var intro = makeOverlay('kg-intro',
   '<p class="kg-story">Once a century, the <b>vermilion moon</b> rises over the mountain temple. ' +
   'Tonight the <b>warden</b> that keeps these halls has come apart, ' +
   'scattered into <b>five seals</b> along the night walk.<br><br>' +
-  'Find them as you wander. Learn its name. Restore the warden before the moon sets.</p>' +
+  'Find them, learn its name, restore the warden before the moon sets.</p>' +
+  '<ol class="kg-steps">' +
+  '<li><b>Scroll down.</b> The walk has five stops, one seal at each.</li>' +
+  '<li><b>Tap the glowing moon</b> (bottom right) when it appears. That takes the seal.</li>' +
+  '<li><b>Each seal whispers a clue word.</b> Your clues are kept under the Help button.</li>' +
+  '<li><b>With all five, the temple door asks a riddle.</b> Pick the answer that fits every clue.</li>' +
+  '</ol>' +
   '<button class="kg-btn" id="kg-begin">Begin the vigil</button>' +
-  '<p class="kg-tip">Scroll the walk · when a light breathes, tap it<br>Sound on for the full atmosphere</p>');
+  '<p class="kg-tip">About five minutes. Stuck? Tap Help any time, it never gives the answer away.</p>');
 var sealModal = makeOverlay('kg-seal',
   '<div class="kg-glyph" id="kg-glyph"></div>' +
   '<div class="kg-sealname" id="kg-sealname"></div>' +
@@ -142,10 +149,24 @@ var finalModal = makeOverlay('kg-final',
   '<p class="kg-verse">“I am born of light, yet I am not light.<br>' +
   'I follow your every step, yet leave no footprints.<br>' +
   'When the last candle dies, I die beside it.<br><br>Speak my name.”</p>' +
+  '<p class="kg-tip" style="margin:0 0 14px">Your five clues: <span id="kg-recap"></span><br>Choose the answer that fits all of them.</p>' +
   '<button class="kg-choice" data-answer="moon">The Vermilion Moon</button>' +
   '<button class="kg-choice" data-answer="shadow">The Temple\u2019s Shadow</button>' +
   '<button class="kg-choice" data-answer="wind">The Night Wind</button>' +
   '<p class="kg-tip" id="kg-final-tip"></p>');
+var helpModal = makeOverlay('kg-help',
+  '<div class="kg-kicker">How to play</div>' +
+  '<ol class="kg-steps">' +
+  '<li>Scroll down through the temple walk. There are five stops.</li>' +
+  '<li>At each stop, tap the glowing moon (bottom right) to take its seal.</li>' +
+  '<li>Every seal gives a clue word, saved below.</li>' +
+  '<li>With all five seals, the door asks a riddle. Choose the answer that fits all five clues.</li>' +
+  '</ol>' +
+  '<div class="kg-kicker" style="margin-top:18px">Your clues</div>' +
+  '<ul class="kg-clues" id="kg-clues"></ul>' +
+  '<p class="kg-tip" id="kg-nudge" style="margin:14px 0 0"></p>' +
+  '<div class="kg-row"><button class="kg-btn" id="kg-nudge-btn">Give me a nudge</button>' +
+  '<button class="kg-btn" id="kg-help-close">Back to the walk</button></div>');
 var ending = makeOverlay('kg-ending',
   '<div class="kg-kicker" style="color:#c9a24a">The warden restored</div>' +
   '<div class="kg-glyph" style="background:#e6bb6a;color:#2a1608">影</div>' +
@@ -157,7 +178,7 @@ var ending = makeOverlay('kg-ending',
   '<button class="kg-btn" id="kg-again">Play again</button>' +
   '<p class="kg-credit">Vermilion Moon · a temple mystery</p>');
 
-var overlays = [intro, sealModal, finalModal, ending];
+var overlays = [intro, sealModal, helpModal, finalModal, ending];
 function showOverlay(o){
   overlays.forEach(function(x){
     if (x === o){ x.style.display = 'flex'; requestAnimationFrame(function(){ x.classList.remove('kg-hidden'); }); }
@@ -192,6 +213,7 @@ addEventListener('scroll', function(){
 }, {passive:true});
 
 function updateOrb(){
+  renderGoal();
   if (!playing || finished || document.querySelector('.kg-overlay:not(.kg-hidden)')){
     orb.classList.remove('on'); return;
   }
@@ -207,6 +229,39 @@ function updateOrb(){
   orb.classList.add('on');
 }
 
+/* ---------- guidance ---------- */
+function nextOpen(){
+  for (var i = 1; i <= CHAPTERS.length; i++){
+    var k = (currentIdx + i) % CHAPTERS.length;
+    if (!collected[CHAPTERS[k].id]) return CHAPTERS[k];
+  }
+  return null;
+}
+function nudgeText(){
+  if (sealCount() >= CHAPTERS.length) return 'You have all five. Read the clue words together. One answer fits every one. Tap the glowing door.';
+  var c = CHAPTERS[currentIdx];
+  if (!collected[c.id]) return 'A seal is hidden at this stop. Look for the glowing moon at the bottom right and tap it.';
+  var n = nextOpen();
+  return 'You have this stop\u2019s seal. Scroll down to ' + (n ? n.name : 'the next stop') + ' for the next one.';
+}
+function renderGoal(){
+  if (!playing || finished){ goal.classList.remove('on'); return; }
+  var n = sealCount();
+  var t = n >= CHAPTERS.length ? 'All five seals found. Tap the glowing door.' :
+    (collected[CHAPTERS[currentIdx].id] ? 'Seal found here. Scroll down for the next stop.' : 'A seal is hidden here. Tap the glowing moon.');
+  goal.textContent = n + ' of 5 seals · ' + t;
+  goal.classList.add('on');
+}
+function renderClues(){
+  var ul = document.getElementById('kg-clues'); ul.innerHTML = '';
+  var words = [];
+  CHAPTERS.forEach(function(c){
+    var li = el('li', collected[c.id] ? 'got' : '', collected[c.id] ? '<span>' + c.glyph + '</span> ' + c.keyword : '<span>' + c.glyph + '</span> not found yet');
+    ul.appendChild(li); if (collected[c.id]) words.push(c.keyword);
+  });
+  var r = document.getElementById('kg-recap'); if (r) r.textContent = words.join(' · ');
+}
+
 /* ---------- game actions ---------- */
 function refreshSlots(){
   CHAPTERS.forEach(function(c){
@@ -216,7 +271,7 @@ function refreshSlots(){
 function collectCurrent(){
   var c = CHAPTERS[currentIdx];
   if (collected[c.id]) return;
-  collected[c.id] = true; save(); refreshSlots(); sfx.chime();
+  collected[c.id] = true; save(); refreshSlots(); renderClues(); sfx.chime();
   if (sealCount() >= CHAPTERS.length) sfx.bell();
   document.getElementById('kg-glyph').textContent = c.glyph;
   document.getElementById('kg-sealname').textContent = c.name;
@@ -234,7 +289,7 @@ document.getElementById('kg-continue').addEventListener('click', function(){ sho
 function openFinal(){
   if (finished) return;
   document.getElementById('kg-final-tip').textContent = '';
-  showOverlay(finalModal); sfx.bell();
+  renderClues(); showOverlay(finalModal); sfx.bell();
 }
 Array.prototype.forEach.call(document.querySelectorAll('.kg-choice'), function(btn){
   btn.addEventListener('click', function(){
@@ -242,7 +297,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.kg-choice'), function(b
     wrongGuesses++; save(); sfx.thud();
     btn.classList.add('kg-shake');
     setTimeout(function(){ btn.classList.remove('kg-shake'); }, 500);
-    document.getElementById('kg-final-tip').textContent = 'The ground shudders. That is not its name.';
+    document.getElementById('kg-final-tip').textContent = 'The ground shudders. That is not its name. Check your five clues.';
   });
 });
 function endGame(){
@@ -260,14 +315,13 @@ document.getElementById('kg-again').addEventListener('click', function(){
 });
 hintBtn.addEventListener('click', function(){
   if (!playing || finished) return;
-  var msg = sealCount() >= CHAPTERS.length ? FINAL_HINT : HINTS[hintIdx++ % HINTS.length];
-  document.getElementById('kg-glyph').textContent = '月';
-  document.getElementById('kg-sealname').textContent = 'A whisper';
-  document.getElementById('kg-verse').textContent = msg;
-  document.getElementById('kg-keyword').textContent = '';
-  document.getElementById('kg-count').textContent = 'Seal ' + sealCount() + ' of 5';
-  showOverlay(sealModal);
+  renderClues(); document.getElementById('kg-nudge').textContent = '';
+  showOverlay(helpModal);
 });
+document.getElementById('kg-nudge-btn').addEventListener('click', function(){
+  document.getElementById('kg-nudge').textContent = nudgeText();
+});
+document.getElementById('kg-help-close').addEventListener('click', function(){ showOverlay(null); });
 muteBtn.addEventListener('click', function(){ setMuted(!muted); });
 document.getElementById('kg-begin').addEventListener('click', function(){
   initAudio();
@@ -285,7 +339,7 @@ setInterval(function(){
 }, 1000);
 
 /* boot */
-refreshSlots();
+refreshSlots(); renderClues();
 detectChapter();
 showOverlay(intro);
 })();

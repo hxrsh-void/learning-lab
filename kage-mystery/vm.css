@@ -16,3 +16,8 @@
 ::selection{background:var(--vermilion);color:#fff}
 #vignette{background:radial-gradient(125% 95% at 50% 42%,transparent 38%,rgba(14,6,30,.62) 100%),radial-gradient(60% 40% at 80% 8%,rgba(255,61,34,.10),transparent 70%)}
 .word-fb{color:rgba(241,230,210,.08)}
+
+/* cleaner night: no grain, no huge wordmark, no preview card, no busy hero stats */
+#grain{display:none!important}
+.peek,.hero-foot .chapters,.word-fb,.hero-side{display:none!important}
+#vignette{background:radial-gradient(130% 100% at 50% 45%,transparent 55%,rgba(14,6,30,.45) 100%)}

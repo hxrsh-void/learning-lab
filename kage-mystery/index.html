@@ -3062,6 +3062,7 @@ function buildWordmark() {
   });
   group.position.z = WORD_Z;
   scene.add(group);
+  group.visible = false;
   WORD.group = group;
   WORD.ink = { xMin: xMin, xMax: xMax, cx: (xMin + xMax) / 2, w: xMax - xMin, asc: ascMax };
 }
@@ -3966,7 +3967,7 @@ function initPost() {
   POST.comp = new THREE.ShaderMaterial({
     uniforms: {
       tS: { value: null }, tB: { value: null }, uRes: { value: new THREE.Vector2(w, h) },
-      uT: { value: 0 }, uBloom: { value: .34 }, uCA: { value: 1 }, uGrain: { value: .020 },
+      uT: { value: 0 }, uBloom: { value: .34 }, uCA: { value: .25 }, uGrain: { value: 0 },
       uVig: { value: 1 }, uExp: { value: .62 }, uFade: { value: 1 }, uSat: { value: 1.05 }
     },
     vertexShader: QUAD_VS,
