@@ -1,0 +1,18 @@
+/* Vermilion Moon - identity layer: serif display type, warm paper + indigo night, gold hairlines */
+.display{font-family:'Cormorant Garamond','Shippori Mincho',Georgia,serif;text-transform:none;font-weight:500;letter-spacing:-.005em;line-height:1.02}
+.h-hero{font-size:clamp(40px,5.4vw,84px)}
+.h-sec{font-size:clamp(36px,4.8vw,74px)}
+.display em,.h-hero span{font-style:normal}
+.brand-tx b{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.3em;font-weight:600}
+.brand-tx i{color:var(--gold)}
+.eyebrow{color:var(--gold)}
+.eyebrow .dot{background:var(--vermilion);box-shadow:0 0 12px var(--vermilion)}
+.lead,.body-lg{font-family:'Cormorant Garamond',serif;font-size:1.28em;line-height:1.5;font-weight:400}
+.sec-head .k b,.gate-stats b{color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:500}
+.sec-head .rule{background:linear-gradient(90deg,rgba(230,187,106,.5),transparent)}
+.les h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.5em}
+.les .t{color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic}
+.cta{border-color:var(--gold)}
+::selection{background:var(--vermilion);color:#fff}
+#vignette{background:radial-gradient(125% 95% at 50% 42%,transparent 38%,rgba(14,6,30,.62) 100%),radial-gradient(60% 40% at 80% 8%,rgba(255,61,34,.10),transparent 70%)}
+.word-fb{color:rgba(241,230,210,.08)}

@@ -1,73 +1,69 @@
-/* ===== KAGE: The Five Seals — game layer ===== */
-#kg-hud{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;
-  display:none;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(223,231,224,.13);
-  border-radius:999px;background:rgba(5,7,10,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+/* ===== Vermilion Moon - game layer ===== */
+#kg-hud{position:fixed;left:50%;transform:translateX(-50%);top:calc(14px + env(safe-area-inset-top));z-index:70;
+  display:none;align-items:center;gap:10px;padding:7px 14px;border:1px solid rgba(230,187,106,.28);
+  border-radius:4px;background:rgba(14,8,28,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 #kg-hud.on{display:flex}
-.kg-slot{width:32px;height:32px;border:1px solid rgba(223,231,224,.16);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:15px;color:#78837c;
-  font-family:'NotoJP',serif;transition:all .5s cubic-bezier(.22,.61,.36,1)}
-.kg-slot.got{border-color:#c9a24a;color:#c9a24a;box-shadow:0 0 14px rgba(201,162,74,.4);background:rgba(201,162,74,.08)}
-#kg-timer{font-size:12px;letter-spacing:.12em;color:#aab4ad;font-variant-numeric:tabular-nums;margin-left:4px}
-.kg-icon{width:32px;height:32px;border:1px solid rgba(223,231,224,.16);border-radius:50%;
-  background:transparent;color:#aab4ad;font-size:14px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font-family:'Onest',sans-serif}
-.kg-icon:active{border-color:#aab4ad}
-/* orb */
-#kg-orb{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:70;
-  width:66px;height:66px;border-radius:50%;border:1px solid rgba(224,35,28,.6);cursor:pointer;
-  display:none;align-items:center;justify-content:center;flex-direction:column;
-  background:radial-gradient(circle at 50% 40%, rgba(224,35,28,.4), rgba(5,7,10,.85) 75%);
-  box-shadow:0 0 26px rgba(224,35,28,.45), inset 0 0 18px rgba(224,35,28,.3);
-  animation:kg-breathe 2.6s ease-in-out infinite;font-family:'NotoJP',serif;
-  -webkit-tap-highlight-color:transparent}
+/* seals are hanko stamps: square, outlined, fill in vermilion when found */
+.kg-slot{width:30px;height:30px;border:1px solid rgba(241,230,210,.2);border-radius:3px;transform:rotate(-4deg);
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:rgba(241,230,210,.28);
+  font-family:'Shippori Mincho','NotoJP',serif;font-weight:700;transition:all .6s cubic-bezier(.22,.61,.36,1)}
+.kg-slot:nth-child(even){transform:rotate(3deg)}
+.kg-slot.got{border-color:#ff3d22;background:#ff3d22;color:#fff2de;box-shadow:0 0 16px rgba(255,61,34,.55)}
+#kg-timer{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.1em;color:#e6bb6a;font-variant-numeric:tabular-nums;margin:0 2px 0 6px}
+.kg-icon{width:28px;height:28px;border:1px solid rgba(230,187,106,.35);border-radius:50%;
+  background:transparent;color:#e6bb6a;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.kg-icon:active{background:rgba(230,187,106,.18)}
+/* orb is a small moon */
+#kg-orb{position:fixed;right:18px;bottom:calc(30px + env(safe-area-inset-bottom));z-index:70;
+  width:72px;height:72px;border-radius:50%;border:0;cursor:pointer;display:none;align-items:center;justify-content:center;flex-direction:column;
+  background:radial-gradient(circle at 38% 34%,#ff8a5c,#ff3d22 55%,#8c1408 100%);
+  box-shadow:0 0 0 7px rgba(255,61,34,.12),0 0 34px rgba(255,61,34,.6);
+  animation:kg-breathe 2.8s ease-in-out infinite;font-family:'Shippori Mincho','NotoJP',serif;-webkit-tap-highlight-color:transparent}
 #kg-orb.on{display:flex}
-#kg-orb .kg-orb-glyph{font-size:26px;color:#ff8a6a;line-height:1;text-shadow:0 0 14px rgba(255,90,60,.8)}
-#kg-orb .kg-orb-label{font-family:'Onest',sans-serif;font-size:8.5px;letter-spacing:.18em;
-  text-transform:uppercase;color:#aab4ad;margin-top:3px}
-#kg-orb.gold{border-color:rgba(201,162,74,.8);
-  background:radial-gradient(circle at 50% 40%, rgba(201,162,74,.45), rgba(5,7,10,.85) 75%);
-  box-shadow:0 0 30px rgba(201,162,74,.55), inset 0 0 18px rgba(201,162,74,.3)}
-#kg-orb.gold .kg-orb-glyph{color:#e8c46a;text-shadow:0 0 14px rgba(201,162,74,.9)}
-@keyframes kg-breathe{50%{transform:scale(1.09);box-shadow:0 0 40px rgba(224,35,28,.65), inset 0 0 22px rgba(224,35,28,.4)}}
-#kg-orb.gold{animation-name:kg-breathe-gold}
-@keyframes kg-breathe-gold{50%{transform:scale(1.09);box-shadow:0 0 44px rgba(201,162,74,.75), inset 0 0 22px rgba(201,162,74,.45)}}
-/* overlays */
+#kg-orb .kg-orb-glyph{font-size:27px;color:#2a0a08;line-height:1;font-weight:700}
+#kg-orb .kg-orb-label{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.06em;font-style:italic;color:#2a0a08;margin-top:2px}
+#kg-orb.gold{background:radial-gradient(circle at 38% 34%,#fff0c4,#e6bb6a 55%,#8a6420 100%);
+  box-shadow:0 0 0 7px rgba(230,187,106,.14),0 0 38px rgba(230,187,106,.7);animation-name:kg-breathe-gold}
+@keyframes kg-breathe{50%{transform:scale(1.1);box-shadow:0 0 0 12px rgba(255,61,34,.07),0 0 50px rgba(255,61,34,.75)}}
+@keyframes kg-breathe-gold{50%{transform:scale(1.1);box-shadow:0 0 0 12px rgba(230,187,106,.08),0 0 54px rgba(230,187,106,.85)}}
+/* overlays: a paper scroll card on the night */
 .kg-overlay{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;
-  padding:22px;background:rgba(3,5,8,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:20px;background:radial-gradient(circle at 50% 40%,rgba(48,14,30,.7),rgba(8,4,18,.9));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   opacity:1;transition:opacity .6s cubic-bezier(.22,.61,.36,1)}
 .kg-overlay.kg-hidden{opacity:0;pointer-events:none}
-.kg-panel{max-width:540px;width:100%;text-align:center;max-height:92vh;overflow-y:auto;color:#dfe7e0;
-  font-family:'Onest',system-ui,sans-serif;font-weight:300}
-.kg-kicker{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#ff5a3c;margin-bottom:14px}
-.kg-title{font-family:'NotoJP',serif;font-weight:700;font-size:clamp(38px,8vw,58px);
-  letter-spacing:.14em;margin:0 0 6px}
-.kg-sub{font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;color:#aab4ad;margin-bottom:24px}
-.kg-story{font-size:15px;line-height:1.75;color:#aab4ad;margin:0 auto 28px;max-width:470px}
-.kg-story b{color:#dfe7e0;font-weight:400}
-.kg-btn{display:inline-block;padding:14px 38px;border:1px solid #e0231c;color:#dfe7e0;
-  background:linear-gradient(180deg,rgba(224,35,28,.22),rgba(224,35,28,.08));
-  font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;
-  transition:all .3s;border-radius:2px;font-family:'Onest',sans-serif;font-weight:400}
-.kg-btn:hover,.kg-btn:active{background:#e0231c;color:#fff;box-shadow:0 0 30px rgba(224,35,28,.45)}
-.kg-tip{margin-top:24px;font-size:11.5px;color:#78837c;letter-spacing:.08em;line-height:1.8}
-.kg-glyph{font-family:'NotoJP',serif;font-size:70px;color:#c9a24a;margin-bottom:6px;
-  text-shadow:0 0 36px rgba(201,162,74,.55)}
-.kg-sealname{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:#ff5a3c;margin-bottom:18px}
-.kg-verse{font-family:'NotoJP',serif;font-size:18px;line-height:1.9;color:#dfe7e0;margin-bottom:20px}
-.kg-keyword{font-size:13px;color:#c9a24a;letter-spacing:.1em;margin-bottom:24px}
-.kg-keyword span{border-bottom:1px solid #c9a24a;padding-bottom:2px}
-.kg-count{font-size:11px;letter-spacing:.28em;color:#78837c;text-transform:uppercase;margin-bottom:22px}
-.kg-choice{display:block;width:100%;margin:0 0 12px;padding:15px;border:1px solid rgba(223,231,224,.13);
-  border-radius:2px;background:rgba(10,14,18,.6);color:#dfe7e0;font-size:15.5px;cursor:pointer;
-  font-family:'NotoJP',serif;letter-spacing:.05em;transition:all .25s}
-.kg-choice:hover,.kg-choice:active{border-color:#e0231c;background:rgba(224,35,28,.12)}
+.kg-panel{position:relative;max-width:520px;width:100%;text-align:center;max-height:92vh;overflow-y:auto;color:#f1e6d2;
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;padding:34px 28px 28px;
+  border:1px solid rgba(230,187,106,.4);background:linear-gradient(180deg,rgba(26,14,40,.92),rgba(14,8,26,.94));
+  box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 5px rgba(10,7,22,.9),inset 0 0 0 6px rgba(230,187,106,.18)}
+.kg-moonmark{width:78px;height:78px;margin:0 auto 14px;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%,#ff9a6a,#ff3d22 55%,#7a1006 100%);box-shadow:0 0 0 9px rgba(255,61,34,.1),0 0 50px rgba(255,61,34,.55)}
+.kg-kicker{font-family:'Onest',sans-serif;font-size:10.5px;letter-spacing:.42em;text-transform:uppercase;color:#e6bb6a;margin-bottom:12px}
+.kg-title{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,9vw,60px);letter-spacing:.04em;line-height:1;margin:0 0 4px}
+.kg-title small{display:block;font-family:'Shippori Mincho',serif;font-size:.34em;letter-spacing:.7em;color:#ff6a48;margin-top:10px;padding-left:.7em}
+.kg-sub{font-family:'Onest',sans-serif;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#c2b4a6;margin:14px 0 22px}
+.kg-story{font-size:19px;line-height:1.55;color:#cfc2b2;margin:0 auto 26px;max-width:440px}
+.kg-story b{color:#f1e6d2;font-weight:600;font-style:italic}
+.kg-btn{display:inline-block;padding:13px 34px;border:1px solid #e6bb6a;color:#f1e6d2;background:transparent;
+  font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;cursor:pointer;transition:all .3s;border-radius:0;font-family:'Onest',sans-serif;font-weight:400}
+.kg-btn:hover,.kg-btn:active{background:#ff3d22;border-color:#ff3d22;color:#fff;box-shadow:0 0 30px rgba(255,61,34,.5)}
+.kg-tip{margin-top:22px;font-family:'Onest',sans-serif;font-size:11px;color:#8f8096;letter-spacing:.08em;line-height:1.8}
+.kg-glyph{width:84px;height:84px;margin:0 auto 12px;border-radius:4px;transform:rotate(-3deg);background:#ff3d22;color:#fff2de;
+  display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho','NotoJP',serif;font-weight:700;font-size:50px;
+  box-shadow:0 0 44px rgba(255,61,34,.5)}
+.kg-sealname{font-family:'Onest',sans-serif;font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:#e6bb6a;margin-bottom:16px}
+.kg-verse{font-size:23px;line-height:1.4;font-style:italic;color:#f1e6d2;margin-bottom:18px}
+.kg-keyword{font-family:'Onest',sans-serif;font-size:12px;color:#c2b4a6;letter-spacing:.08em;margin-bottom:22px}
+.kg-keyword span{color:#e6bb6a;font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;letter-spacing:.02em;border-bottom:1px solid rgba(230,187,106,.6)}
+.kg-count{font-family:'Onest',sans-serif;font-size:10.5px;letter-spacing:.3em;color:#8f8096;text-transform:uppercase;margin-bottom:20px}
+.kg-choice{display:block;width:100%;margin:0 0 10px;padding:14px;border:1px solid rgba(230,187,106,.3);border-radius:0;
+  background:rgba(10,7,22,.5);color:#f1e6d2;font-size:20px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-weight:500;transition:all .25s}
+.kg-choice:hover,.kg-choice:active{border-color:#ff3d22;background:rgba(255,61,34,.14)}
 .kg-shake{animation:kg-shake .5s}
 @keyframes kg-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(4px)}}
-.kg-stats{font-size:13px;color:#aab4ad;letter-spacing:.12em;margin:16px 0 26px;line-height:2}
-.kg-stats b{color:#c9a24a;font-weight:400}
-.kg-credit{margin-top:26px;font-size:11px;color:#78837c;letter-spacing:.1em}
-.kg-credit a{color:#aab4ad}
+.kg-stats{font-family:'Onest',sans-serif;font-size:12.5px;color:#c2b4a6;letter-spacing:.1em;margin:16px 0 24px;line-height:2}
+.kg-stats b{color:#e6bb6a;font-weight:500}
+.kg-credit{margin-top:24px;font-family:'Onest',sans-serif;font-size:10.5px;color:#8f8096;letter-spacing:.14em;text-transform:uppercase}
 #kg-fade{position:fixed;inset:0;z-index:78;pointer-events:none;opacity:0;
-  background:radial-gradient(circle at 50% 45%, #f6e9c8, #c9a24a 55%, #05070a 130%);
-  transition:opacity 2.2s cubic-bezier(.22,.61,.36,1)}
+  background:radial-gradient(circle at 50% 45%,#fff0d0,#e6bb6a 50%,#2a0e22 130%);transition:opacity 2.2s cubic-bezier(.22,.61,.36,1)}
 #kg-fade.on{opacity:1}
+@media(max-width:480px){.kg-panel{padding:28px 18px 22px}.kg-verse{font-size:21px}#kg-hud{gap:6px;padding:6px 10px}.kg-slot{width:27px;height:27px}}

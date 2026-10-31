@@ -1,4 +1,4 @@
-/* ===== KAGE: The Five Seals — game layer (original code, layered on the Kage walk) ===== */
+/* ===== Vermilion Moon: game layer ===== */
 (function(){
 'use strict';
 
@@ -19,7 +19,7 @@ var CHAPTERS = [
     verse:'At noon it crouches at your feet. At dusk it stretches long across the moss.',
     keyword:'stretches long' }
 ];
-var SAVE_KEY = 'kage-five-seals-v2';
+var SAVE_KEY = 'vermilion-moon-v1';
 var HINTS = [
   'A light breathes somewhere on this screen. Follow the glow.',
   'Each chapter of the walk hides one seal. Scroll slowly.',
@@ -120,13 +120,14 @@ function makeOverlay(id, inner){
   o.id = id; o.style.display = 'none'; root.appendChild(o); return o;
 }
 var intro = makeOverlay('kg-intro',
+  '<div class="kg-moonmark"></div>' +
   '<div class="kg-kicker">A temple mystery</div>' +
-  '<h1 class="kg-title">KAGE</h1>' +
+  '<h1 class="kg-title">Vermilion Moon<small>朱月</small></h1>' +
   '<div class="kg-sub">The Five Seals</div>' +
-  '<p class="kg-story">Once a century, the <b>crimson moon</b> rises over the mountain temple. ' +
-  'Tonight the <b>Kage</b> — the shadow that guards these halls — has come apart, ' +
+  '<p class="kg-story">Once a century, the <b>vermilion moon</b> rises over the mountain temple. ' +
+  'Tonight the <b>warden</b> that keeps these halls has come apart, ' +
   'scattered into <b>five seals</b> along the night walk.<br><br>' +
-  'Find them as you wander. Learn its name. Restore the guardian before the moon sets.</p>' +
+  'Find them as you wander. Learn its name. Restore the warden before the moon sets.</p>' +
   '<button class="kg-btn" id="kg-begin">Begin the vigil</button>' +
   '<p class="kg-tip">Scroll the walk · when a light breathes, tap it<br>Sound on for the full atmosphere</p>');
 var sealModal = makeOverlay('kg-seal',
@@ -141,20 +142,20 @@ var finalModal = makeOverlay('kg-final',
   '<p class="kg-verse">“I am born of light, yet I am not light.<br>' +
   'I follow your every step, yet leave no footprints.<br>' +
   'When the last candle dies, I die beside it.<br><br>Speak my name.”</p>' +
-  '<button class="kg-choice" data-answer="moon">The Crimson Moon</button>' +
+  '<button class="kg-choice" data-answer="moon">The Vermilion Moon</button>' +
   '<button class="kg-choice" data-answer="shadow">The Temple\u2019s Shadow</button>' +
   '<button class="kg-choice" data-answer="wind">The Night Wind</button>' +
   '<p class="kg-tip" id="kg-final-tip"></p>');
 var ending = makeOverlay('kg-ending',
-  '<div class="kg-kicker" style="color:#c9a24a">The guardian restored</div>' +
-  '<h1 class="kg-title" style="font-size:clamp(34px,7vw,52px)">影</h1>' +
+  '<div class="kg-kicker" style="color:#c9a24a">The warden restored</div>' +
+  '<div class="kg-glyph" style="background:#e6bb6a;color:#2a1608">影</div>' +
   '<p class="kg-story">The seals flare gold. Light pours from the hall — and out of it steps ' +
-  'the <b>Kage</b>, the temple\u2019s own shadow, whole again.<br><br>' +
-  'It bows to you, once, deeply. The crimson moon softens toward dawn. ' +
-  'The mountain sleeps. The guardian walks.</p>' +
+  'the temple\u2019s own <b>shadow</b>, whole again.<br><br>' +
+  'It bows to you, once, deeply. The vermilion moon softens toward dawn. ' +
+  'The mountain sleeps. The warden walks.</p>' +
   '<div class="kg-stats" id="kg-stats"></div>' +
   '<button class="kg-btn" id="kg-again">Play again</button>' +
-  '<p class="kg-credit">A mystery woven into the <a href="https://fromiedc.vercel.app" target="_blank" rel="noopener">Kage night walk</a></p>');
+  '<p class="kg-credit">Vermilion Moon · a temple mystery</p>');
 
 var overlays = [intro, sealModal, finalModal, ending];
 function showOverlay(o){
@@ -196,7 +197,7 @@ function updateOrb(){
   }
   if (sealCount() >= CHAPTERS.length){
     orb.classList.add('on'); orb.classList.add('gold');
-    orbGlyph.textContent = '影'; orbLabel.textContent = 'the door listens';
+    orbGlyph.textContent = '扉'; orbLabel.textContent = 'the door listens';
     return;
   }
   orb.classList.remove('gold');
@@ -249,7 +250,7 @@ function endGame(){
   var secs = Math.max(0, Math.floor((Date.now() - (startTime || Date.now()))/1000));
   var mm = String(Math.floor(secs/60)).padStart(2,'0'), ss = String(secs%60).padStart(2,'0');
   document.getElementById('kg-stats').innerHTML =
-    'Guardian restored in <b>' + mm + ':' + ss + '</b><br>Seals <b>5 / 5</b> · wrong names spoken <b>' + wrongGuesses + '</b>';
+    'Warden restored in <b>' + mm + ':' + ss + '</b><br>Seals <b>5 / 5</b> · wrong names spoken <b>' + wrongGuesses + '</b>';
   showOverlay(null); sfx.swell();
   fade.classList.add('on');
   setTimeout(function(){ fade.classList.remove('on'); showOverlay(ending); }, 2400);
@@ -260,7 +261,7 @@ document.getElementById('kg-again').addEventListener('click', function(){
 hintBtn.addEventListener('click', function(){
   if (!playing || finished) return;
   var msg = sealCount() >= CHAPTERS.length ? FINAL_HINT : HINTS[hintIdx++ % HINTS.length];
-  document.getElementById('kg-glyph').textContent = '影';
+  document.getElementById('kg-glyph').textContent = '月';
   document.getElementById('kg-sealname').textContent = 'A whisper';
   document.getElementById('kg-verse').textContent = msg;
   document.getElementById('kg-keyword').textContent = '';
