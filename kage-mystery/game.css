@@ -89,3 +89,6 @@
 .kg-row .kg-btn{padding:11px 18px;font-size:10.5px;letter-spacing:.2em}
 @media(min-width:900px){#kg-hud{top:62px}#kg-goal{top:112px}}
 @media(max-width:480px){.kg-steps li{font-size:16px}#kg-goal{font-size:10.5px}}
+.kg-help-btn{white-space:nowrap}
+@media(max-width:480px){#kg-hud{width:calc(100vw - 20px);max-width:calc(100vw - 20px);box-sizing:border-box;gap:4px;padding:5px 6px;left:10px;transform:none;justify-content:space-between;top:calc(58px + env(safe-area-inset-top))}
+#kg-hud .kg-slot{width:22px;height:22px;font-size:11px;flex:none}#kg-timer{font-size:11px}.kg-help-btn{padding:0 8px;font-size:11px;white-space:nowrap;flex:none}#kg-goal{top:calc(104px + env(safe-area-inset-top))}}

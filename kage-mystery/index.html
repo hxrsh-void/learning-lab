@@ -2711,7 +2711,7 @@ function buildMoon() {
        is decoded out of sRGB before this multiplies it, so the tint has to be
        written in linear, where the same look is ≈ .21. Reading the ratio
        straight off the reference is what left the moon a pale pink. */
-    new THREE.MeshBasicMaterial({ map: tx(texMoon()), color: hdr(3.6, .64, .61),
+    new THREE.MeshBasicMaterial({ map: tx(texMoon()), color: hdr(4.4, .60, .52),
       transparent: true, depthWrite: false, fog: false, toneMapped: false }));
   disc.position.set(MOON.x, MOON.y, MOON.z); disc.renderOrder = 1;
   scene.add(disc); WORLD.moon = disc;
@@ -2722,6 +2722,56 @@ function buildMoon() {
       transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: .44 }));
   halo.position.set(MOON.x, MOON.y, MOON.z - .3); halo.renderOrder = 0;
   scene.add(halo); WORLD.moonHalo = halo;
+
+  /* a second, wider bloom of vermilion air and slow god-rays fanning from the disc */
+  const air = new THREE.Mesh(new THREE.PlaneGeometry(MOON.r * 14, MOON.r * 14),
+    new THREE.MeshBasicMaterial({ map: tx(texGlow('rgba(255,70,50,.75)', 'rgba(170,24,40,.26)')),
+      transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: .5 }));
+  air.position.set(MOON.x, MOON.y, MOON.z - .6); air.renderOrder = 0; scene.add(air); WORLD.moonAir = air;
+  const sc = cvs(64, 512), sx = sc.getContext('2d'), sg = sx.createLinearGradient(0, 0, 0, 512);
+  sg.addColorStop(0, 'rgba(255,150,110,.9)'); sg.addColorStop(.5, 'rgba(255,90,70,.22)'); sg.addColorStop(1, 'rgba(255,60,50,0)');
+  sx.fillStyle = sg; sx.fillRect(0, 0, 64, 512);
+  const hs = sx.createLinearGradient(0, 0, 64, 0); hs.addColorStop(0, 'rgba(0,0,0,1)'); hs.addColorStop(.5, 'rgba(0,0,0,0)'); hs.addColorStop(1, 'rgba(0,0,0,1)');
+  sx.globalCompositeOperation = 'destination-out'; sx.fillStyle = hs; sx.fillRect(0, 0, 64, 512);
+  const rayT = tx(sc); WORLD.rays = [];
+  [[-.62, 52, 5], [-.30, 64, 4], [.10, 58, 6], [.44, 46, 4], [-.9, 40, 3]].forEach((r, i) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(r[2], r[1]),
+      new THREE.MeshBasicMaterial({ map: rayT, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: .1 }));
+    m.geometry.translate(0, -r[1] / 2, 0);
+    m.position.set(MOON.x, MOON.y, MOON.z - .4); m.rotation.z = r[0]; m.renderOrder = 0;
+    m.userData = { a: r[0], ph: i * 1.7 }; scene.add(m); WORLD.rays.push(m);
+  });
+
+  /* embers and sky-lanterns rising through the whole walk */
+  const EN = LOW ? 150 : 380, ep = new Float32Array(EN * 3), es = [];
+  const er = mulberry32(77);
+  for (let i = 0; i < EN; i++) { ep[i * 3] = (er() - .5) * 60; ep[i * 3 + 1] = er() * 26; ep[i * 3 + 2] = (er() - .5) * 70; es.push({ v: .25 + er() * .9, w: er() * 6.28 }); }
+  const eg = new THREE.BufferGeometry(); eg.setAttribute('position', new THREE.BufferAttribute(ep, 3));
+  const em = new THREE.Points(eg, new THREE.PointsMaterial({ map: tx(texGlow('rgba(255,214,150,1)', 'rgba(255,120,50,.5)')), size: 1.35, transparent: true,
+    blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: 1, color: 0xffc080 }));
+  em.frustumCulled = false; em.renderOrder = 6; scene.add(em);
+  WORLD.rise = { pts: em, geo: eg, sp: es, n: EN };
+
+  /* the moon's reflection laid on the courtyard water */
+  const rc = cvs(128, 512), rx = rc.getContext('2d'), rr = mulberry32(5);
+  for (let i = 0; i < 170; i++) {
+    const yy = i / 170 * 512, wd = (14 + rr() * 90) * (1 - Math.abs(yy / 512 - .35) * .9), cx = 64 + (rr() - .5) * 26;
+    rx.fillStyle = 'rgba(255,' + (110 + rr() * 90 | 0) + ',' + (70 + rr() * 60 | 0) + ',' + (.25 + rr() * .6) + ')';
+    rx.fillRect(cx - wd / 2, yy, wd, 1.5 + rr() * 2.5);
+  }
+  const rfl = new THREE.Mesh(new THREE.PlaneGeometry(9, 46), new THREE.MeshBasicMaterial({ map: tx(rc), transparent: true,
+    blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: .5 }));
+  rfl.rotation.x = -Math.PI / 2; rfl.position.set(MOON.x * .42, .045, -10); rfl.renderOrder = 2; scene.add(rfl); WORLD.reflect = rfl;
+
+  /* a release of paper lanterns that lifts past the camera mid-walk */
+  const LT = tx(texGlow('rgba(255,236,190,1)', 'rgba(255,150,60,.55)')); WORLD.lifts = [];
+  const lr = mulberry32(31);
+  for (let i = 0; i < (LOW ? 20 : 40); i++) {
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: LT, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: 0, color: 0xffb468 }));
+    sp.scale.setScalar(.9 + lr() * 1.1); sp.renderOrder = 7;
+    sp.userData = { dx: (lr() - .5) * 26, dz: -3 - lr() * 28, y: lr() * 24, v: .7 + lr() * 1.1, ph: lr() * 6.28 };
+    scene.add(sp); WORLD.lifts.push(sp);
+  }
 }
 /* On a tall frame the rig steps back and its horizontal reach narrows, which
    would slide the moon off the right edge - draw it in by the same amount. */
@@ -3872,9 +3922,9 @@ function buildCardCloth() {
 }
 
 function buildLights() {
-  scene.add(new THREE.HemisphereLight(0x53838f, 0x060a08, .13));
+  scene.add(new THREE.HemisphereLight(0x7480d0, 0x120a14, .34));
 
-  const key = new THREE.DirectionalLight(0xb6dbe4, 1.22);
+  const key = new THREE.DirectionalLight(0xc2d8f0, 1.55);
   key.position.set(2.6, 21, 2.5);
   key.target.position.set(0, 2.2, -12.5); scene.add(key.target);
   if (WANT_SHADOW) {
@@ -3889,10 +3939,11 @@ function buildLights() {
 
   /* moonlight: no shadow, no fill, purely a rim down the right-hand slope of
      every roof - without it the hall is a flat black cut-out against the sky */
-  const moonKey = new THREE.DirectionalLight(0xff6a42, .52);
+  const moonKey = new THREE.DirectionalLight(0xff7a50, 1.35);
   moonKey.position.set(26, 30, -60);
   moonKey.target.position.set(0, 8, -40); scene.add(moonKey.target);
   scene.add(moonKey);
+  const violet = new THREE.DirectionalLight(0x8a70ff, .55); violet.position.set(-30, 14, -20); violet.target.position.set(0, 4, -20); scene.add(violet.target); scene.add(violet);
 
   /* The hall's own lamps. They light the podium and the top of the flight and
      nothing else - a range that reaches the roof turns the whole building into
@@ -3968,12 +4019,12 @@ function initPost() {
     uniforms: {
       tS: { value: null }, tB: { value: null }, uRes: { value: new THREE.Vector2(w, h) },
       uT: { value: 0 }, uBloom: { value: .34 }, uCA: { value: .25 }, uGrain: { value: 0 },
-      uVig: { value: 1 }, uExp: { value: .62 }, uFade: { value: 1 }, uSat: { value: 1.05 }
+      uVig: { value: 1 }, uExp: { value: .62 }, uFade: { value: 1 }, uSat: { value: 1.05 }, uTint: { value: new THREE.Vector3(1,1,1) }
     },
     vertexShader: QUAD_VS,
     fragmentShader:
       'uniform sampler2D tS; uniform sampler2D tB; uniform vec2 uRes;\n' +
-      'uniform float uT, uBloom, uCA, uGrain, uVig, uExp, uFade, uSat;\n' +
+      'uniform float uT, uBloom, uCA, uGrain, uVig, uExp, uFade, uSat; uniform vec3 uTint;\n' +
       'varying vec2 vUv;\n' +
       'vec3 aces(vec3 x){ return clamp((x*(2.51*x+0.03))/(x*(2.43*x+0.59)+0.14), 0.0, 1.0); }\n' +
       'void main(){\n' +
@@ -3984,7 +4035,7 @@ function initPost() {
       ' c.g = texture2D(tS, vUv).g;\n' +
       ' c.b = texture2D(tS, vUv - d*ca).b;\n' +
       ' c += texture2D(tB, vUv).rgb * uBloom;\n' +
-      ' c *= uExp;\n' +
+      ' c *= uExp; c *= uTint;\n' +
       ' c = aces(c);\n' +
       ' float l = dot(c, vec3(0.2126,0.7152,0.0722));\n' +
       ' c = mix(vec3(l), c, uSat);\n' +
@@ -4643,6 +4694,47 @@ function updateWorld(dt) {
     m.material.opacity = a;
     m.visible = a > .006;
   });
+  /* chapter mood: grade, moon and rays shift as the walk goes on */
+  {
+    const sm = RIG.smooth, TN = [[1,1,1,.80,.46],[1.05,.97,1,.82,.50],[1.16,.90,.86,.84,.58],[.86,1.0,1.16,.82,.50],[1.18,1.0,.80,.88,.60],[1.18,1.02,.84,.92,.64]];
+    const i0 = clamp(Math.floor(sm), 0, 4), ff = smooth(0, 1, clamp(sm - i0, 0, 1)), a = TN[i0], b = TN[i0 + 1];
+    if (POST.comp) {
+      const U = POST.comp.uniforms;
+      U.uTint.value.set(lerp(a[0], b[0], ff), lerp(a[1], b[1], ff), lerp(a[2], b[2], ff));
+      U.uExp.value = lerp(a[3], b[3], ff); U.uBloom.value = lerp(a[4], b[4], ff);
+    }
+    if (WORLD.moon) {
+      const sink = smooth(2.6, 4.6, sm), grow = 1 + .30 * smooth(0, 2, sm) + .25 * sink;
+      const y = MOON.y - sink * 9.5;
+      [WORLD.moon, WORLD.moonHalo, WORLD.moonAir].forEach((m, k) => { m.position.y = y; m.scale.setScalar(grow * (k === 2 ? 1 + Math.sin(clock * .5) * .03 : 1)); });
+      WORLD.moonAir.material.opacity = .42 + .22 * smooth(1, 2.6, sm) + Math.sin(clock * .4) * .05;
+      WORLD.rays.forEach(r => { r.position.y = y; r.scale.setScalar(grow); r.material.opacity = (.07 + .07 * smooth(0, 2.4, sm)) * (.75 + .25 * Math.sin(clock * .45 + r.userData.ph)); r.rotation.z = r.userData.a + Math.sin(clock * .12 + r.userData.ph) * .06; });
+    }
+    if (WORLD.reflect) {
+      WORLD.reflect.material.opacity = (.38 + .3 * smooth(.6, 2.6, sm)) * (.8 + .2 * Math.sin(clock * 1.3));
+      WORLD.reflect.position.x = MOON.x * .42 + Math.sin(clock * .5) * .12;
+    }
+    if (WORLD.lifts) {
+      const on = smooth(1.1, 2.0, sm) * (1 - smooth(3.5, 4.5, sm));
+      WORLD.lifts.forEach(l => {
+        const u = l.userData; u.y += u.v * dt * (1 + on); if (u.y > 26) u.y = -.5;
+        l.position.set(camera.position.x + u.dx + Math.sin(clock * .4 + u.ph) * .8, u.y, camera.position.z + u.dz);
+        l.material.opacity = on * smooth(0, 3, u.y) * (1 - smooth(18, 26, u.y)) * (.8 + .2 * Math.sin(clock * 3 + u.ph));
+        l.visible = l.material.opacity > .01;
+      });
+    }
+    if (WORLD.rise) {
+      const E = WORLD.rise, p = E.geo.attributes.position.array, cz = camera.position.z, cx = camera.position.x;
+      for (let k = 0; k < E.n; k++) {
+        const s = E.sp[k]; p[k * 3 + 1] += s.v * dt; p[k * 3] += Math.sin(clock * .5 + s.w) * dt * .25;
+        if (p[k * 3 + 1] > 26) { p[k * 3 + 1] = -1; }
+        let dz = p[k * 3 + 2] - cz; if (dz > 12) p[k * 3 + 2] -= 70; else if (dz < -58) p[k * 3 + 2] += 70;
+        let dx = p[k * 3] - cx; if (dx > 30) p[k * 3] -= 60; else if (dx < -30) p[k * 3] += 60;
+      }
+      E.geo.attributes.position.needsUpdate = true;
+      E.pts.material.opacity = .55 + .35 * smooth(.5, 3, sm);
+    }
+  }
   updateLeaves(dt);
   updateWisps(dt);
   if (CARDS.length) CARDS.forEach(C => { const u = C.cam.userData; u.push = damp(u.push, u.want, 3.4, dt); });
